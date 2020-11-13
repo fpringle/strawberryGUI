@@ -1,0 +1,7 @@
+/build/
+*.swp
+__pycache__
+*.exe
+*.o
+*.o.d
+.qmake*
