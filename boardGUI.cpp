@@ -41,6 +41,7 @@ void ChessSquare::onPress() {
 
 
 ChessBoard::ChessBoard(QWidget *parent) : QWidget(parent) {
+//    setFixedSize(400,400);
     QGridLayout *grid = new QGridLayout(this);
     grid->setSpacing(0);
 
