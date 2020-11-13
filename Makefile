@@ -17,7 +17,7 @@ CXX           = g++
 DEFINES       = -DQT_DEPRECATED_WARNINGS -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -O2 -Wall -W -D_REENTRANT -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -O2 -Wall -W -D_REENTRANT -fPIC $(DEFINES)
-INCPATH       = -I. -I. -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt5/QtGui -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++
+INCPATH       = -I. -I. -I../core -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt5/QtGui -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++
 QMAKE         = /usr/lib/qt5/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -52,12 +52,34 @@ OBJECTS_DIR   = ./
 
 ####### Files
 
-SOURCES       = boardGUI.cpp \
+SOURCES       = main.cpp \
+		boardGUI.cpp \
 		infoGUI.cpp \
-		main.cpp 
-OBJECTS       = boardGUI.o \
+		playerGUI.cpp \
+		../core/action.cpp \
+		../core/board.cpp \
+		../core/check.cpp \
+		../core/eval.cpp \
+		../core/hash.cpp \
+		../core/init.cpp \
+		../core/move.cpp \
+		../core/play.cpp \
+		../core/search.cpp \
+		../core/twiddle.cpp 
+OBJECTS       = main.o \
+		boardGUI.o \
 		infoGUI.o \
-		main.o
+		playerGUI.o \
+		action.o \
+		board.o \
+		check.o \
+		eval.o \
+		hash.o \
+		init.o \
+		move.o \
+		play.o \
+		search.o \
+		twiddle.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/linux.conf \
@@ -134,9 +156,35 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
 		chessGUI.pro boardGUI.h \
-		infoGUI.h boardGUI.cpp \
+		infoGUI.h \
+		playerGUI.h \
+		../core/action.h \
+		../core/board.h \
+		../core/eval.h \
+		../core/hash.h \
+		../core/init.h \
+		../core/move.h \
+		../core/play.h \
+		../core/search.h \
+		../core/tree.h \
+		../core/twiddle.h \
+		../core/typedefs.h \
+		boardGUI.h \
+		infoGUI.h \
+		playerGUI.h main.cpp \
+		boardGUI.cpp \
 		infoGUI.cpp \
-		main.cpp
+		playerGUI.cpp \
+		../core/action.cpp \
+		../core/board.cpp \
+		../core/check.cpp \
+		../core/eval.cpp \
+		../core/hash.cpp \
+		../core/init.cpp \
+		../core/move.cpp \
+		../core/play.cpp \
+		../core/search.cpp \
+		../core/twiddle.cpp
 QMAKE_TARGET  = chessGUI
 DESTDIR       = build/
 TARGET        = build/chessGUI
@@ -317,8 +365,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents boardGUI.h infoGUI.h $(DISTDIR)/
-	$(COPY_FILE) --parents boardGUI.cpp infoGUI.cpp main.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents boardGUI.h infoGUI.h playerGUI.h ../core/action.h ../core/board.h ../core/eval.h ../core/hash.h ../core/init.h ../core/move.h ../core/play.h ../core/search.h ../core/tree.h ../core/twiddle.h ../core/typedefs.h boardGUI.h infoGUI.h playerGUI.h $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp boardGUI.cpp infoGUI.cpp playerGUI.cpp ../core/action.cpp ../core/board.cpp ../core/check.cpp ../core/eval.cpp ../core/hash.cpp ../core/init.cpp ../core/move.cpp ../core/play.cpp ../core/search.cpp ../core/twiddle.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -368,15 +416,98 @@ compiler_clean: compiler_moc_predefs_clean
 
 ####### Compile
 
-boardGUI.o: boardGUI.cpp boardGUI.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o boardGUI.o boardGUI.cpp
-
-infoGUI.o: infoGUI.cpp infoGUI.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o infoGUI.o infoGUI.cpp
-
 main.o: main.cpp boardGUI.h \
 		infoGUI.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
+
+boardGUI.o: boardGUI.cpp boardGUI.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o boardGUI.o boardGUI.cpp
+
+infoGUI.o: infoGUI.cpp infoGUI.h \
+		boardGUI.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o infoGUI.o infoGUI.cpp
+
+playerGUI.o: playerGUI.cpp playerGUI.h \
+		boardGUI.h \
+		../core/play.h \
+		../core/board.h \
+		../core/typedefs.h \
+		../core/move.h \
+		../core/tree.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o playerGUI.o playerGUI.cpp
+
+action.o: ../core/action.cpp ../core/action.h \
+		../core/board.h \
+		../core/typedefs.h \
+		../core/move.h \
+		../core/twiddle.h \
+		../core/eval.h \
+		../core/hash.h \
+		../core/play.h \
+		../core/tree.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o action.o ../core/action.cpp
+
+board.o: ../core/board.cpp ../core/board.h \
+		../core/typedefs.h \
+		../core/twiddle.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o board.o ../core/board.cpp
+
+check.o: ../core/check.cpp ../core/board.h \
+		../core/typedefs.h \
+		../core/move.h \
+		../core/twiddle.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o check.o ../core/check.cpp
+
+eval.o: ../core/eval.cpp ../core/board.h \
+		../core/typedefs.h \
+		../core/eval.h \
+		../core/twiddle.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o eval.o ../core/eval.cpp
+
+hash.o: ../core/hash.cpp ../core/board.h \
+		../core/typedefs.h \
+		../core/move.h \
+		../core/hash.h \
+		../core/twiddle.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o hash.o ../core/hash.cpp
+
+init.o: ../core/init.cpp ../core/board.h \
+		../core/typedefs.h \
+		../core/move.h \
+		../core/init.h \
+		../core/hash.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o init.o ../core/init.cpp
+
+move.o: ../core/move.cpp ../core/board.h \
+		../core/typedefs.h \
+		../core/move.h \
+		../core/twiddle.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o move.o ../core/move.cpp
+
+play.o: ../core/play.cpp ../core/board.h \
+		../core/typedefs.h \
+		../core/move.h \
+		../core/play.h \
+		../core/tree.h \
+		../core/action.h \
+		../core/search.h \
+		../core/init.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o play.o ../core/play.cpp
+
+search.o: ../core/search.cpp ../core/board.h \
+		../core/typedefs.h \
+		../core/action.h \
+		../core/move.h \
+		../core/search.h \
+		../core/play.h \
+		../core/tree.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o search.o ../core/search.cpp
+
+twiddle.o: ../core/twiddle.cpp ../core/move.h \
+		../core/board.h \
+		../core/typedefs.h \
+		../core/twiddle.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o twiddle.o ../core/twiddle.cpp
 
 ####### Install
 
