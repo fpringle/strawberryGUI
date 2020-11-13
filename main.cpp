@@ -1,4 +1,5 @@
 #include "boardGUI.h"
+#include "infoGUI.h"
 #include <QApplication>
 
 

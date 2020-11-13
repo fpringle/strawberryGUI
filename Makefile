@@ -53,8 +53,10 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = boardGUI.cpp \
+		infoGUI.cpp \
 		main.cpp 
 OBJECTS       = boardGUI.o \
+		infoGUI.o \
 		main.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
@@ -112,6 +114,7 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qt_config.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exclusive_builds.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/toolchain.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_pre.prf \
@@ -130,7 +133,9 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exceptions.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
-		chessGUI.pro boardGUI.h boardGUI.cpp \
+		chessGUI.pro boardGUI.h \
+		infoGUI.h boardGUI.cpp \
+		infoGUI.cpp \
 		main.cpp
 QMAKE_TARGET  = chessGUI
 DESTDIR       = build/
@@ -200,6 +205,7 @@ Makefile: chessGUI.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.con
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qt_config.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exclusive_builds.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/toolchain.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_pre.prf \
@@ -276,6 +282,7 @@ Makefile: chessGUI.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.con
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/qt_config.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qmake.conf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_post.prf:
+.qmake.stash:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exclusive_builds.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/toolchain.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/default_pre.prf:
@@ -310,8 +317,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents boardGUI.h $(DISTDIR)/
-	$(COPY_FILE) --parents boardGUI.cpp main.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents boardGUI.h infoGUI.h $(DISTDIR)/
+	$(COPY_FILE) --parents boardGUI.cpp infoGUI.cpp main.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -364,7 +371,11 @@ compiler_clean: compiler_moc_predefs_clean
 boardGUI.o: boardGUI.cpp boardGUI.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o boardGUI.o boardGUI.cpp
 
-main.o: main.cpp boardGUI.h
+infoGUI.o: infoGUI.cpp infoGUI.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o infoGUI.o infoGUI.cpp
+
+main.o: main.cpp boardGUI.h \
+		infoGUI.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
 ####### Install

@@ -1,10 +1,8 @@
 #ifndef __BOARD_GUI_H
 #define __BOARD_GUI_H
 
-#include <QApplication>
 #include <QWidget>
 #include <QPushButton>
-#include <QGridLayout>
 #include <QIcon>
 
 #include <iostream>

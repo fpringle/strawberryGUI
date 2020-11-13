@@ -1,5 +1,8 @@
 #include "boardGUI.h"
 
+#include <QGridLayout>
+
+
 namespace chessGUI {
 
 
