@@ -56,6 +56,7 @@ SOURCES       = main.cpp \
 		boardGUI.cpp \
 		infoGUI.cpp \
 		playerGUI.cpp \
+		chessthread.cpp \
 		../core/action.cpp \
 		../core/board.cpp \
 		../core/check.cpp \
@@ -65,11 +66,12 @@ SOURCES       = main.cpp \
 		../core/move.cpp \
 		../core/play.cpp \
 		../core/search.cpp \
-		../core/twiddle.cpp 
+		../core/twiddle.cpp moc_chessthread.cpp
 OBJECTS       = main.o \
 		boardGUI.o \
 		infoGUI.o \
 		playerGUI.o \
+		chessthread.o \
 		action.o \
 		board.o \
 		check.o \
@@ -79,7 +81,8 @@ OBJECTS       = main.o \
 		move.o \
 		play.o \
 		search.o \
-		twiddle.o
+		twiddle.o \
+		moc_chessthread.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/linux.conf \
@@ -158,6 +161,7 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		chessGUI.pro boardGUI.h \
 		infoGUI.h \
 		playerGUI.h \
+		chessthread.h \
 		../core/action.h \
 		../core/board.h \
 		../core/eval.h \
@@ -175,6 +179,7 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		boardGUI.cpp \
 		infoGUI.cpp \
 		playerGUI.cpp \
+		chessthread.cpp \
 		../core/action.cpp \
 		../core/board.cpp \
 		../core/check.cpp \
@@ -365,8 +370,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents boardGUI.h infoGUI.h playerGUI.h ../core/action.h ../core/board.h ../core/eval.h ../core/hash.h ../core/init.h ../core/move.h ../core/play.h ../core/search.h ../core/tree.h ../core/twiddle.h ../core/typedefs.h boardGUI.h infoGUI.h playerGUI.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp boardGUI.cpp infoGUI.cpp playerGUI.cpp ../core/action.cpp ../core/board.cpp ../core/check.cpp ../core/eval.cpp ../core/hash.cpp ../core/init.cpp ../core/move.cpp ../core/play.cpp ../core/search.cpp ../core/twiddle.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents boardGUI.h infoGUI.h playerGUI.h chessthread.h ../core/action.h ../core/board.h ../core/eval.h ../core/hash.h ../core/init.h ../core/move.h ../core/play.h ../core/search.h ../core/tree.h ../core/twiddle.h ../core/typedefs.h boardGUI.h infoGUI.h playerGUI.h $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp boardGUI.cpp infoGUI.cpp playerGUI.cpp chessthread.cpp ../core/action.cpp ../core/board.cpp ../core/check.cpp ../core/eval.cpp ../core/hash.cpp ../core/init.cpp ../core/move.cpp ../core/play.cpp ../core/search.cpp ../core/twiddle.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -398,8 +403,19 @@ compiler_moc_predefs_clean:
 moc_predefs.h: /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 	g++ -pipe -O2 -Wall -W -dM -E -o moc_predefs.h /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all:
+compiler_moc_header_make_all: moc_chessthread.cpp
 compiler_moc_header_clean:
+	-$(DEL_FILE) moc_chessthread.cpp
+moc_chessthread.cpp: chessthread.h \
+		../core/play.h \
+		../core/board.h \
+		../core/typedefs.h \
+		../core/move.h \
+		../core/tree.h \
+		moc_predefs.h \
+		/usr/lib/qt5/bin/moc
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/freddy/Documents/cpl/chess_net/gui/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/freddy/Documents/cpl/chess_net/gui -I/home/freddy/Documents/cpl/chess_net/gui -I/home/freddy/Documents/cpl/chess_net/core -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include chessthread.h -o moc_chessthread.cpp
+
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
 compiler_moc_source_make_all:
@@ -412,7 +428,7 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_moc_predefs_clean 
+compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean 
 
 ####### Compile
 
@@ -448,8 +464,17 @@ playerGUI.o: playerGUI.cpp playerGUI.h \
 		../core/board.h \
 		../core/typedefs.h \
 		../core/move.h \
-		../core/tree.h
+		../core/tree.h \
+		chessthread.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o playerGUI.o playerGUI.cpp
+
+chessthread.o: chessthread.cpp chessthread.h \
+		../core/play.h \
+		../core/board.h \
+		../core/typedefs.h \
+		../core/move.h \
+		../core/tree.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o chessthread.o chessthread.cpp
 
 action.o: ../core/action.cpp ../core/action.h \
 		../core/board.h \
@@ -523,6 +548,9 @@ twiddle.o: ../core/twiddle.cpp ../core/move.h \
 		../core/typedefs.h \
 		../core/twiddle.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o twiddle.o ../core/twiddle.cpp
+
+moc_chessthread.o: moc_chessthread.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_chessthread.o moc_chessthread.cpp
 
 ####### Install
 

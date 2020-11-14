@@ -26,9 +26,10 @@ public:
     PlayerGUI(std::string, QWidget *parent=0);
     void initGraphics();
     void updateBoard();
-    void doMove(chessCore::move_t move);
+    bool doMove(chessCore::move_t move);
     void interpretMove(int fromIndex, int toIndex);
     void updateHistory();
+    void compMove();
 };
 
 

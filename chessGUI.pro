@@ -21,6 +21,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 HEADERS += boardGUI.h \
            infoGUI.h \
            playerGUI.h \
+           chessthread.h \
            ../core/action.h \
            ../core/board.h \
            ../core/eval.h \
@@ -39,6 +40,7 @@ SOURCES += main.cpp \
            boardGUI.cpp \
            infoGUI.cpp \
            playerGUI.cpp \
+           chessthread.cpp \
            ../core/action.cpp \
            ../core/board.cpp \
            ../core/check.cpp \

@@ -1,8 +1,11 @@
 #include "playerGUI.h"
+#include "chessthread.h"
 
 #include "board.h"
 
 #include <QGridLayout>
+#include <QThread>
+#include <QCoreApplication>
 
 #include <vector>
 #include <sstream>
@@ -13,6 +16,7 @@ namespace chessGUI {
 
 PlayerGUI::PlayerGUI(QWidget *parent) : QWidget(parent) {
     player = new chessCore::Player();
+    qRegisterMetaType<chessCore::move_t>();
     initGraphics();
     updateBoard();
 }
@@ -25,6 +29,7 @@ PlayerGUI::PlayerGUI(chessCore::bitboard * startPositions, bool * castling,
     player = new chessCore::Player(startPositions, castling, ep, dpp,
                                    clock, full_clock, side, open_val,
                                    end_val, hash);
+    qRegisterMetaType<chessCore::move_t>();
     initGraphics();
     updateBoard();
 }
@@ -32,6 +37,7 @@ PlayerGUI::PlayerGUI(chessCore::bitboard * startPositions, bool * castling,
 PlayerGUI::PlayerGUI(std::string fen, QWidget *parent)
     : QWidget(parent) {
     player = new chessCore::Player(fen);
+    qRegisterMetaType<chessCore::move_t>();
     initGraphics();
     updateBoard();
 }
@@ -44,6 +50,7 @@ void PlayerGUI::initGraphics() {
     mainGrid->addWidget(board, 0, 0);
     mainGrid->addWidget(info, 0, 1);
     setLayout(mainGrid);
+    setWindowTitle("Chess");
 }
 
 void PlayerGUI::updateBoard() {
@@ -58,8 +65,14 @@ void PlayerGUI::updateBoard() {
     updateHistory();
     chessCore::colour side;
     player->getSide(&side);
-    if (side == chessCore::white) info->setMiscText("White to move");
-    else info->setMiscText("Black to move");
+    if (side == chessCore::white) {
+        info->setMiscText("White to move");
+        board->setActive(true);
+    }
+    else {
+        info->setMiscText("Black to move");
+        board->setActive(false);
+    }
 }
 
 void PlayerGUI::interpretMove(int fromIndex, int toIndex) {
@@ -68,33 +81,53 @@ void PlayerGUI::interpretMove(int fromIndex, int toIndex) {
     for (int i=0; i<num_moves; i++) {
         if (moves[i].from_sq() == fromIndex &&
                 moves[i].to_sq() == toIndex) {
-            doMove(moves[i]);
+            if (doMove(moves[i]) ) {
+                compMove();
+            }
             return;
         }
     }
-    std::cout << "Invalid move\n";
+    info->setMiscText("Invalid move");
 }
 
 
-void PlayerGUI::doMove(chessCore::move_t move) {
+bool PlayerGUI::doMove(chessCore::move_t move) {
     player->doMoveInPlace(move);
     updateBoard();
-    return;
-
-    std::cout << "Available moves:\n";
-    chessCore::move_t moves[256];
-    int num_moves = player->gen_legal_moves(moves);
-    for (int i=0; i<num_moves; i++) {
-        std::cout << "  " << moves[i].from_sq()
-                  << " -> " << moves[i].to_sq() << "\n";
+    if (player->gameover()) {
+        switch (player->is_checkmate()) {
+            case 1:
+                info->setMiscText("Black wins!");
+                break;
+            case -1:
+                info->setMiscText("White wins!");
+                break;
+            case 0:
+                info->setMiscText("Draw!");
+                break;
+        }
+        board->setActive(false);
+        return false;
     }
+    return true;
 }
 
 void PlayerGUI::updateHistory() {
     std::stringstream ss;
     player->print_history(ss);
-//    std::cout << ss.str();
     info->updateHistory(ss.str());
+}
+
+void PlayerGUI::compMove() {
+    board->setActive(false);
+    info->setMiscText("Computer thinking...");
+
+    WorkerThread *workerThread = new WorkerThread(player, this);
+    connect(workerThread, &WorkerThread::resultReady,
+            this, &PlayerGUI::doMove);
+    connect(workerThread, &WorkerThread::finished,
+            workerThread, &QObject::deleteLater);
+    workerThread->start();
 }
 
 

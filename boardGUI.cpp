@@ -84,13 +84,14 @@ void ChessBoard::updateButtonStates() {
 }
 
 void ChessBoard::buttonPressed(int idx) {
+    if (! active) return;
+
     if (firstIndex == -1) {
         firstIndex = idx;
         secondIndex = -1;
     }
     else if (secondIndex == -1) {
         secondIndex = idx;
-//        std::cout << firstIndex << ", " << secondIndex << std::endl; // do something
         PlayerGUI * prnt = (PlayerGUI*)(parentWidget());
         prnt->interpretMove(firstIndex, secondIndex);
         firstIndex = -1;
@@ -125,6 +126,10 @@ void ChessBoard::loadBoard(bitboard* bb) {
         }
         all_pieces >>= 1;
     }
+}
+
+void ChessBoard::setActive(bool act) {
+    active = act;
 }
 
 

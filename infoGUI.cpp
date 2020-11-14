@@ -50,8 +50,6 @@ infoPane::infoPane(QWidget *parent) : QWidget(parent) {
     grid->addWidget(miscInfo, 2, 0);
 
     setLayout(grid);
-    std::cout << moveHistory->size().width() << " "
-              << moveHistory->size().height() << std::endl;
 }
 
 void infoPane::setCastlingRights(bool *rights) {

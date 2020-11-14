@@ -29,6 +29,7 @@ public:
 
 class ChessBoard : public QWidget {
 private:
+    bool active;
     int firstIndex, secondIndex;
     ChessSquare * squares[8][8];
 public:
@@ -36,6 +37,7 @@ public:
     void loadBoard(bitboard* bb);
     void buttonPressed(int idx);
     void updateButtonStates();
+    void setActive(bool act);
 };
 
 
