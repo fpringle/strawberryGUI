@@ -54,9 +54,10 @@ OBJECTS_DIR   = ./
 
 SOURCES       = main.cpp \
 		boardGUI.cpp \
+		chessthread.cpp \
 		infoGUI.cpp \
 		playerGUI.cpp \
-		chessthread.cpp \
+		promotion.cpp \
 		../core/action.cpp \
 		../core/board.cpp \
 		../core/check.cpp \
@@ -69,9 +70,10 @@ SOURCES       = main.cpp \
 		../core/twiddle.cpp moc_chessthread.cpp
 OBJECTS       = main.o \
 		boardGUI.o \
+		chessthread.o \
 		infoGUI.o \
 		playerGUI.o \
-		chessthread.o \
+		promotion.o \
 		action.o \
 		board.o \
 		check.o \
@@ -159,9 +161,10 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
 		chessGUI.pro boardGUI.h \
+		chessthread.h \
 		infoGUI.h \
 		playerGUI.h \
-		chessthread.h \
+		promotion.h \
 		../core/action.h \
 		../core/board.h \
 		../core/eval.h \
@@ -177,9 +180,10 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		infoGUI.h \
 		playerGUI.h main.cpp \
 		boardGUI.cpp \
+		chessthread.cpp \
 		infoGUI.cpp \
 		playerGUI.cpp \
-		chessthread.cpp \
+		promotion.cpp \
 		../core/action.cpp \
 		../core/board.cpp \
 		../core/check.cpp \
@@ -370,8 +374,8 @@ distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents boardGUI.h infoGUI.h playerGUI.h chessthread.h ../core/action.h ../core/board.h ../core/eval.h ../core/hash.h ../core/init.h ../core/move.h ../core/play.h ../core/search.h ../core/tree.h ../core/twiddle.h ../core/typedefs.h boardGUI.h infoGUI.h playerGUI.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp boardGUI.cpp infoGUI.cpp playerGUI.cpp chessthread.cpp ../core/action.cpp ../core/board.cpp ../core/check.cpp ../core/eval.cpp ../core/hash.cpp ../core/init.cpp ../core/move.cpp ../core/play.cpp ../core/search.cpp ../core/twiddle.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents boardGUI.h chessthread.h infoGUI.h playerGUI.h promotion.h ../core/action.h ../core/board.h ../core/eval.h ../core/hash.h ../core/init.h ../core/move.h ../core/play.h ../core/search.h ../core/tree.h ../core/twiddle.h ../core/typedefs.h boardGUI.h infoGUI.h playerGUI.h $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp boardGUI.cpp chessthread.cpp infoGUI.cpp playerGUI.cpp promotion.cpp ../core/action.cpp ../core/board.cpp ../core/check.cpp ../core/eval.cpp ../core/hash.cpp ../core/init.cpp ../core/move.cpp ../core/play.cpp ../core/search.cpp ../core/twiddle.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -453,6 +457,14 @@ boardGUI.o: boardGUI.cpp boardGUI.h \
 		../core/tree.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o boardGUI.o boardGUI.cpp
 
+chessthread.o: chessthread.cpp chessthread.h \
+		../core/play.h \
+		../core/board.h \
+		../core/typedefs.h \
+		../core/move.h \
+		../core/tree.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o chessthread.o chessthread.cpp
+
 infoGUI.o: infoGUI.cpp infoGUI.h \
 		boardGUI.h \
 		../core/board.h \
@@ -467,16 +479,16 @@ playerGUI.o: playerGUI.cpp playerGUI.h \
 		../core/play.h \
 		../core/move.h \
 		../core/tree.h \
-		chessthread.h
+		chessthread.h \
+		promotion.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o playerGUI.o playerGUI.cpp
 
-chessthread.o: chessthread.cpp chessthread.h \
-		../core/play.h \
+promotion.o: promotion.cpp boardGUI.h \
 		../core/board.h \
 		../core/typedefs.h \
-		../core/move.h \
-		../core/tree.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o chessthread.o chessthread.cpp
+		promotion.h \
+		../core/move.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o promotion.o promotion.cpp
 
 action.o: ../core/action.cpp ../core/action.h \
 		../core/board.h \

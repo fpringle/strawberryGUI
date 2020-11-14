@@ -19,9 +19,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 # Input
 HEADERS += boardGUI.h \
+           chessthread.h \
            infoGUI.h \
            playerGUI.h \
-           chessthread.h \
+           promotion.h \
            ../core/action.h \
            ../core/board.h \
            ../core/eval.h \
@@ -38,9 +39,10 @@ HEADERS += boardGUI.h \
            playerGUI.h
 SOURCES += main.cpp \
            boardGUI.cpp \
+           chessthread.cpp \
            infoGUI.cpp \
            playerGUI.cpp \
-           chessthread.cpp \
+           promotion.cpp \
            ../core/action.cpp \
            ../core/board.cpp \
            ../core/check.cpp \

@@ -1,5 +1,6 @@
 #include "playerGUI.h"
 #include "chessthread.h"
+#include "promotion.h"
 
 #include "board.h"
 
@@ -71,21 +72,31 @@ void PlayerGUI::updateBoard() {
     player->getSide(&side);
     if (side == chessCore::white) {
         info->setMiscText("White to move");
-        board->setActive(true);
+//        board->setActive(true);
     }
     else {
         info->setMiscText("Black to move");
-        board->setActive(false);
+//        board->setActive(false);
     }
+    board->setActive(side == downSide);
 }
 
 void PlayerGUI::interpretMove(int fromIndex, int toIndex) {
     chessCore::move_t moves[256];
     int num_moves = player->gen_legal_moves(moves);
+    chessCore::move_t move;
     for (int i=0; i<num_moves; i++) {
         if (moves[i].from_sq() == fromIndex &&
                 moves[i].to_sq() == toIndex) {
-            if (doMove(moves[i]) ) {
+
+            if (moves[i].is_promotion()) {
+                move = whichPromotion(moves[i]);
+            }
+            else {
+                move = moves[i];
+            }
+
+            if (doMove(move) ) {
                 compMove();
             }
             return;
@@ -134,5 +145,11 @@ void PlayerGUI::compMove() {
     workerThread->start();
 }
 
+chessCore::move_t PlayerGUI::whichPromotion(chessCore::move_t prom) {
+    PromotionDialog *dlg = new PromotionDialog(downSide, this);
+    chessCore::piece pc = dlg->choose();
+    prom.set_promotion(pc);
+    return prom;
+}
 
 } // end of chessGUI namespace

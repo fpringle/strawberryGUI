@@ -32,6 +32,7 @@ public:
     void interpretMove(int fromIndex, int toIndex);
     void updateHistory();
     void compMove();
+    chessCore::move_t whichPromotion(chessCore::move_t prom);
 };
 
 
