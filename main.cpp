@@ -14,28 +14,8 @@ int main(int argc, char *argv[]) {
     chessCore::init();
     QApplication app(argc, argv);
 //    PlayerGUI *player= new PlayerGUI("r3k2r/p1ppqpb1/bn2pnp1/3PN3/1p2P3/2N2Q1p/PPPBBPPP/R3K2R w Kq - 1 0");
-//    PlayerGUI *player = new PlayerGUI;
-    PlayerGUI *player = new PlayerGUI("3k4/R7/8/8/8/8/K7/7Q w - - 0 1");
+    PlayerGUI *player = new PlayerGUI(chessCore::white);
+//    PlayerGUI *player = new PlayerGUI(chessCore::white, "3k4/R7/8/8/8/8/K7/7Q w - - 0 1");
     player->show();
-    return app.exec();
-}
-
-
-int _main(int argc, char *argv[]) {
-    QApplication app(argc, argv);
-    QWidget *window = new QWidget;
-    QGridLayout *grid = new QGridLayout(window);
-    ChessBoard brd(window);
-    infoPane info(window);
-    grid->addWidget(&brd, 0, 0);
-    grid->addWidget(&info, 0, 1);
-    window->setLayout(grid);
-
-    bitboard pb[12];
-    chessCore::board b;
-    b.getBitboards(pb);
-    brd.loadBoard(pb);
-
-    window->show();
     return app.exec();
 }

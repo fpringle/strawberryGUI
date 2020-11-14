@@ -14,18 +14,21 @@
 namespace chessGUI {
 
 
-PlayerGUI::PlayerGUI(QWidget *parent) : QWidget(parent) {
+PlayerGUI::PlayerGUI(chessCore::colour side, QWidget *parent) : QWidget(parent) {
+    downSide = side;
     player = new chessCore::Player();
     qRegisterMetaType<chessCore::move_t>();
     initGraphics();
     updateBoard();
 }
 
-PlayerGUI::PlayerGUI(chessCore::bitboard * startPositions, bool * castling,
+PlayerGUI::PlayerGUI(chessCore::colour downside,
+        chessCore::bitboard * startPositions, bool * castling,
         bool ep, int dpp, uint8_t clock, uint8_t full_clock, chessCore::colour side,
         chessCore::value_t open_val, chessCore::value_t end_val,
         uint64_t hash, QWidget *parent) : QWidget(parent)  {
 
+    downSide = downside;
     player = new chessCore::Player(startPositions, castling, ep, dpp,
                                    clock, full_clock, side, open_val,
                                    end_val, hash);
@@ -34,8 +37,9 @@ PlayerGUI::PlayerGUI(chessCore::bitboard * startPositions, bool * castling,
     updateBoard();
 }
 
-PlayerGUI::PlayerGUI(std::string fen, QWidget *parent)
-    : QWidget(parent) {
+PlayerGUI::PlayerGUI(chessCore::colour side, std::string fen, QWidget *parent)
+        : QWidget(parent) {
+    downSide = side;
     player = new chessCore::Player(fen);
     qRegisterMetaType<chessCore::move_t>();
     initGraphics();
@@ -45,7 +49,7 @@ PlayerGUI::PlayerGUI(std::string fen, QWidget *parent)
 
 void PlayerGUI::initGraphics() {
     mainGrid = new QGridLayout(this);
-    board = new ChessBoard(this);
+    board = new ChessBoard(downSide, this);
     info = new infoPane(this);
     mainGrid->addWidget(board, 0, 0);
     mainGrid->addWidget(info, 0, 1);

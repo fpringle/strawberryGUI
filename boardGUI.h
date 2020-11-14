@@ -1,6 +1,8 @@
 #ifndef __BOARD_GUI_H
 #define __BOARD_GUI_H
 
+#include "board.h"
+
 #include <QWidget>
 #include <QPushButton>
 #include <QIcon>
@@ -32,8 +34,9 @@ private:
     bool active;
     int firstIndex, secondIndex;
     ChessSquare * squares[8][8];
+    chessCore::colour downSide;
 public:
-    ChessBoard(QWidget *parent=0);
+    ChessBoard(chessCore::colour side, QWidget *parent=0);
     void loadBoard(bitboard* bb);
     void buttonPressed(int idx);
     void updateButtonStates();

@@ -18,12 +18,14 @@ private:
     QGridLayout *mainGrid;
     ChessBoard *board;
     infoPane *info;
+    chessCore::colour downSide;
 public:
-    PlayerGUI(QWidget *parent=0);
-    PlayerGUI(chessCore::bitboard*, bool*, bool, int, uint8_t, uint8_t,
-            chessCore::colour, chessCore::value_t, chessCore::value_t,
-            uint64_t, QWidget *parent=0);
-    PlayerGUI(std::string, QWidget *parent=0);
+    PlayerGUI(chessCore::colour side, QWidget *parent=0);
+    PlayerGUI(chessCore::colour side, chessCore::bitboard*,
+              bool*, bool, int, uint8_t, uint8_t,
+              chessCore::colour, chessCore::value_t, chessCore::value_t,
+              uint64_t, QWidget *parent=0);
+    PlayerGUI(chessCore::colour side, std::string, QWidget *parent=0);
     void initGraphics();
     void updateBoard();
     bool doMove(chessCore::move_t move);

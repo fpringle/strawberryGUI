@@ -433,36 +433,38 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 ####### Compile
 
 main.o: main.cpp boardGUI.h \
+		../core/board.h \
+		../core/typedefs.h \
 		infoGUI.h \
 		playerGUI.h \
 		../core/play.h \
-		../core/board.h \
-		../core/typedefs.h \
 		../core/move.h \
 		../core/tree.h \
 		../core/init.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
 boardGUI.o: boardGUI.cpp boardGUI.h \
+		../core/board.h \
+		../core/typedefs.h \
 		playerGUI.h \
 		infoGUI.h \
 		../core/play.h \
-		../core/board.h \
-		../core/typedefs.h \
 		../core/move.h \
 		../core/tree.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o boardGUI.o boardGUI.cpp
 
 infoGUI.o: infoGUI.cpp infoGUI.h \
-		boardGUI.h
+		boardGUI.h \
+		../core/board.h \
+		../core/typedefs.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o infoGUI.o infoGUI.cpp
 
 playerGUI.o: playerGUI.cpp playerGUI.h \
 		boardGUI.h \
-		infoGUI.h \
-		../core/play.h \
 		../core/board.h \
 		../core/typedefs.h \
+		infoGUI.h \
+		../core/play.h \
 		../core/move.h \
 		../core/tree.h \
 		chessthread.h
