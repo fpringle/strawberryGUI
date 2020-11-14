@@ -4,6 +4,10 @@
 
 #include <QGridLayout>
 
+#include <vector>
+#include <sstream>
+
+
 namespace chessGUI {
 
 
@@ -50,6 +54,12 @@ void PlayerGUI::updateBoard() {
     bool castling[4];
     player->getCastlingRights(castling);
     info->setCastlingRights(castling);
+
+    updateHistory();
+    chessCore::colour side;
+    player->getSide(&side);
+    if (side == chessCore::white) info->setMiscText("White to move");
+    else info->setMiscText("Black to move");
 }
 
 void PlayerGUI::interpretMove(int fromIndex, int toIndex) {
@@ -69,6 +79,7 @@ void PlayerGUI::interpretMove(int fromIndex, int toIndex) {
 void PlayerGUI::doMove(chessCore::move_t move) {
     player->doMoveInPlace(move);
     updateBoard();
+    return;
 
     std::cout << "Available moves:\n";
     chessCore::move_t moves[256];
@@ -78,5 +89,13 @@ void PlayerGUI::doMove(chessCore::move_t move) {
                   << " -> " << moves[i].to_sq() << "\n";
     }
 }
+
+void PlayerGUI::updateHistory() {
+    std::stringstream ss;
+    player->print_history(ss);
+//    std::cout << ss.str();
+    info->updateHistory(ss.str());
+}
+
 
 } // end of chessGUI namespace

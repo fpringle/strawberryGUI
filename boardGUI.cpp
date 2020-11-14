@@ -42,7 +42,7 @@ void ChessSquare::onPress() {
 
 
 ChessBoard::ChessBoard(QWidget *parent) : QWidget(parent) {
-//    setFixedSize(400,400);
+    setFixedSize(400,400);
 
     QGridLayout *grid = new QGridLayout(this);
     grid->setSpacing(0);
@@ -90,7 +90,7 @@ void ChessBoard::buttonPressed(int idx) {
     }
     else if (secondIndex == -1) {
         secondIndex = idx;
-        std::cout << firstIndex << ", " << secondIndex << std::endl; // do something
+//        std::cout << firstIndex << ", " << secondIndex << std::endl; // do something
         PlayerGUI * prnt = (PlayerGUI*)(parentWidget());
         prnt->interpretMove(firstIndex, secondIndex);
         firstIndex = -1;

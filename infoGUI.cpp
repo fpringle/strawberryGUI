@@ -4,25 +4,29 @@
 #include <QLabel>
 #include <QScrollArea>
 #include <iostream>
+#include <QTextStream>
+#include <QTextEdit>
 
 namespace chessGUI {
 
 
 infoPane::infoPane(QWidget *parent) : QWidget(parent) {
 
-    setFixedSize(200,400);
+//    setFixedSize(200,400);
     grid = new QGridLayout(this);
 
-    moveHistory = new QLabel(this);
-//    moveHistory->setFixedSize(100,200);
+    moveHistory = new QTextEdit(this);
+    moveHistory->setReadOnly(true);
     moveHistory->setAlignment(Qt::AlignTop);
 //    moveHistory->setText("1. e2e4    e7e5\n2. g1f3");
 //    moveHistory->setStyleSheet("border: 1px solid black");
 
     QScrollArea *historyScroll = new QScrollArea(this);
+    historyScroll->setFixedSize(170, 324);
     historyScroll->setWidget(moveHistory);
 
     grid->addWidget(historyScroll, 0, 0);
+    moveHistory->setFixedSize(162, 316);
 
     castlingRightsLayout = new QGridLayout;
     grid->addLayout(castlingRightsLayout, 1, 0);
@@ -38,12 +42,16 @@ infoPane::infoPane(QWidget *parent) : QWidget(parent) {
         castlingRightsLayout->addWidget(castlingRightsLabels[i], 0, i);
     }
 
-    miscInfo = new QLabel(this);
+    miscInfo = new QTextEdit(this);
     miscInfo->setAlignment(Qt::AlignTop);
+    miscInfo->setReadOnly(true);
+    miscInfo->setFixedSize(162, 40);
 
     grid->addWidget(miscInfo, 2, 0);
 
     setLayout(grid);
+    std::cout << moveHistory->size().width() << " "
+              << moveHistory->size().height() << std::endl;
 }
 
 void infoPane::setCastlingRights(bool *rights) {
@@ -80,5 +88,16 @@ void infoPane::setCastlingRights(bool *rights) {
     }
 
 }
+
+void infoPane::updateHistory(std::string s) {
+    QString qs = QString::fromStdString(s);
+    moveHistory->setPlainText(qs);
+}
+
+void infoPane::setMiscText(std::string s) {
+    QString qs = QString::fromStdString(s);
+    miscInfo->setPlainText(qs);
+}
+
 
 } // end of chessGUI namespace

@@ -28,6 +28,7 @@ public:
     void updateBoard();
     void doMove(chessCore::move_t move);
     void interpretMove(int fromIndex, int toIndex);
+    void updateHistory();
 };
 
 

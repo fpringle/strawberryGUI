@@ -5,6 +5,9 @@
 #include <QLabel>
 #include <QPushButton>
 #include <QGridLayout>
+#include <QTextEdit>
+
+#include <string>
 
 namespace chessGUI {
 
@@ -14,11 +17,13 @@ private:
     QGridLayout *grid;
     QPushButton *castlingRightsLabels[4];
     QGridLayout *castlingRightsLayout;
-    QLabel *moveHistory;
-    QLabel *miscInfo;
+    QTextEdit *moveHistory;
+    QTextEdit *miscInfo;
 public:
     infoPane(QWidget *parent=0);
     void setCastlingRights(bool *rights);
+    void updateHistory(std::string s);
+    void setMiscText(std::string s);
 };
 
 
