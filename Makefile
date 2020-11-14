@@ -417,10 +417,24 @@ compiler_clean: compiler_moc_predefs_clean
 ####### Compile
 
 main.o: main.cpp boardGUI.h \
-		infoGUI.h
+		infoGUI.h \
+		playerGUI.h \
+		../core/play.h \
+		../core/board.h \
+		../core/typedefs.h \
+		../core/move.h \
+		../core/tree.h \
+		../core/init.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
 
-boardGUI.o: boardGUI.cpp boardGUI.h
+boardGUI.o: boardGUI.cpp boardGUI.h \
+		playerGUI.h \
+		infoGUI.h \
+		../core/play.h \
+		../core/board.h \
+		../core/typedefs.h \
+		../core/move.h \
+		../core/tree.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o boardGUI.o boardGUI.cpp
 
 infoGUI.o: infoGUI.cpp infoGUI.h \
@@ -429,6 +443,7 @@ infoGUI.o: infoGUI.cpp infoGUI.h \
 
 playerGUI.o: playerGUI.cpp playerGUI.h \
 		boardGUI.h \
+		infoGUI.h \
 		../core/play.h \
 		../core/board.h \
 		../core/typedefs.h \

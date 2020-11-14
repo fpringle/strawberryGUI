@@ -18,7 +18,7 @@ private:
     QLabel *miscInfo;
 public:
     infoPane(QWidget *parent=0);
-    void setCastlingRight(bool *rights);
+    void setCastlingRights(bool *rights);
 };
 
 

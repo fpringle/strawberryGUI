@@ -1,2 +1,4 @@
 # To-do list
-- implement infoPane
+- flip board when playing black
+- move history
+- misc messages
