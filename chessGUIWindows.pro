@@ -3,7 +3,7 @@
 ######################################################################
 
 TEMPLATE = app
-TARGET = build/linux/chessGUI
+TARGET = build/windows/chessGUI32
 INCLUDEPATH += . ../core
 
 # The following define makes your compiler warn you if you use any
@@ -11,6 +11,8 @@ INCLUDEPATH += . ../core
 # depend on your compiler). Please consult the documentation of the
 # deprecated API in order to know how to port your code away from it.
 DEFINES += QT_DEPRECATED_WARNINGS
+
+QMAKE_CXXFLAGS += -std=gnu++11
 
 # You can also make your code fail to compile if you use deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -39,6 +41,7 @@ HEADERS += boardGUI.h \
            playerGUI.h
 SOURCES += main.cpp \
            boardGUI.cpp \
+           chessgui32_plugin_import.cpp \
            chessthread.cpp \
            infoGUI.cpp \
            playerGUI.cpp \

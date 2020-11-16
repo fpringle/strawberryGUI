@@ -1,4 +1,5 @@
 /build/
+/release/
 *.swp
 __pycache__
 *.exe
