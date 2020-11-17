@@ -10,7 +10,7 @@
 namespace chessGUI {
 
 
-infoPane::infoPane(QWidget *parent) : QWidget(parent) {
+InfoPane::InfoPane(QWidget *parent) : QWidget(parent) {
 
 //    setFixedSize(200,400);
     grid = new QGridLayout(this);
@@ -52,7 +52,7 @@ infoPane::infoPane(QWidget *parent) : QWidget(parent) {
     setLayout(grid);
 }
 
-void infoPane::setCastlingRights(bool *rights) {
+void InfoPane::setCastlingRights(bool *rights) {
     // white king
     if (rights[0]) {
         castlingRightsLabels[0]->setIcon(pieceIcons[5]);
@@ -87,12 +87,12 @@ void infoPane::setCastlingRights(bool *rights) {
 
 }
 
-void infoPane::updateHistory(std::string s) {
+void InfoPane::updateHistory(std::string s) {
     QString qs = QString::fromStdString(s);
     moveHistory->setPlainText(qs);
 }
 
-void infoPane::setMiscText(std::string s) {
+void InfoPane::setMiscText(std::string s) {
     QString qs = QString::fromStdString(s);
     miscInfo->setPlainText(qs);
 }

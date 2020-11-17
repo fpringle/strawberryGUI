@@ -51,7 +51,7 @@ PlayerGUI::PlayerGUI(chessCore::colour side, std::string fen, QWidget *parent)
 void PlayerGUI::initGraphics() {
     mainGrid = new QGridLayout(this);
     board = new ChessBoard(downSide, this);
-    info = new infoPane(this);
+    info = new InfoPane(this);
     mainGrid->addWidget(board, 0, 0);
     mainGrid->addWidget(info, 0, 1);
     setLayout(mainGrid);
@@ -129,7 +129,7 @@ bool PlayerGUI::doMove(chessCore::move_t move) {
 
 void PlayerGUI::updateHistory() {
     std::stringstream ss;
-    player->print_history(ss);
+    player->print_history_san(ss);
     info->updateHistory(ss.str());
 }
 

@@ -17,7 +17,7 @@ private:
     chessCore::Player *player;
     QGridLayout *mainGrid;
     ChessBoard *board;
-    infoPane *info;
+    InfoPane *info;
     chessCore::colour downSide;
 public:
     PlayerGUI(chessCore::colour side, QWidget *parent=0);

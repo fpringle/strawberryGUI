@@ -12,7 +12,7 @@
 namespace chessGUI {
 
 
-class infoPane : public QWidget {
+class InfoPane : public QWidget {
 private:
     QGridLayout *grid;
     QPushButton *castlingRightsLabels[4];
@@ -20,7 +20,7 @@ private:
     QTextEdit *moveHistory;
     QTextEdit *miscInfo;
 public:
-    infoPane(QWidget *parent=0);
+    InfoPane(QWidget *parent=0);
     void setCastlingRights(bool *rights);
     void updateHistory(std::string s);
     void setMiscText(std::string s);

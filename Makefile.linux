@@ -439,10 +439,10 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 main.o: main.cpp boardGUI.h \
 		../core/board.h \
 		../core/typedefs.h \
+		../core/move.h \
 		infoGUI.h \
 		playerGUI.h \
 		../core/play.h \
-		../core/move.h \
 		../core/tree.h \
 		../core/init.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
@@ -450,10 +450,10 @@ main.o: main.cpp boardGUI.h \
 boardGUI.o: boardGUI.cpp boardGUI.h \
 		../core/board.h \
 		../core/typedefs.h \
+		../core/move.h \
 		playerGUI.h \
 		infoGUI.h \
 		../core/play.h \
-		../core/move.h \
 		../core/tree.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o boardGUI.o boardGUI.cpp
 
@@ -468,16 +468,17 @@ chessthread.o: chessthread.cpp chessthread.h \
 infoGUI.o: infoGUI.cpp infoGUI.h \
 		boardGUI.h \
 		../core/board.h \
-		../core/typedefs.h
+		../core/typedefs.h \
+		../core/move.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o infoGUI.o infoGUI.cpp
 
 playerGUI.o: playerGUI.cpp playerGUI.h \
 		boardGUI.h \
 		../core/board.h \
 		../core/typedefs.h \
+		../core/move.h \
 		infoGUI.h \
 		../core/play.h \
-		../core/move.h \
 		../core/tree.h \
 		chessthread.h \
 		promotion.h
@@ -486,8 +487,8 @@ playerGUI.o: playerGUI.cpp playerGUI.h \
 promotion.o: promotion.cpp boardGUI.h \
 		../core/board.h \
 		../core/typedefs.h \
-		promotion.h \
-		../core/move.h
+		../core/move.h \
+		promotion.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o promotion.o promotion.cpp
 
 action.o: ../core/action.cpp ../core/action.h \
@@ -503,6 +504,7 @@ action.o: ../core/action.cpp ../core/action.h \
 
 board.o: ../core/board.cpp ../core/board.h \
 		../core/typedefs.h \
+		../core/move.h \
 		../core/twiddle.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o board.o ../core/board.cpp
 
@@ -514,6 +516,7 @@ check.o: ../core/check.cpp ../core/board.h \
 
 eval.o: ../core/eval.cpp ../core/board.h \
 		../core/typedefs.h \
+		../core/move.h \
 		../core/eval.h \
 		../core/twiddle.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o eval.o ../core/eval.cpp
@@ -535,7 +538,8 @@ init.o: ../core/init.cpp ../core/board.h \
 move.o: ../core/move.cpp ../core/board.h \
 		../core/typedefs.h \
 		../core/move.h \
-		../core/twiddle.h
+		../core/twiddle.h \
+		../core/action.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o move.o ../core/move.cpp
 
 play.o: ../core/play.cpp ../core/board.h \
@@ -550,15 +554,14 @@ play.o: ../core/play.cpp ../core/board.h \
 
 search.o: ../core/search.cpp ../core/board.h \
 		../core/typedefs.h \
-		../core/action.h \
 		../core/move.h \
+		../core/action.h \
 		../core/search.h \
 		../core/play.h \
 		../core/tree.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o search.o ../core/search.cpp
 
 twiddle.o: ../core/twiddle.cpp ../core/move.h \
-		../core/board.h \
 		../core/typedefs.h \
 		../core/twiddle.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o twiddle.o ../core/twiddle.cpp
