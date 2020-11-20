@@ -4,7 +4,7 @@
 
 TEMPLATE = app
 TARGET = build/linux/chessGUI
-INCLUDEPATH += . ../core
+INCLUDEPATH += . $$_PRO_FILE_PWD_/../core
 OBJECTS_DIR = obj/linux
 MOC_DIR = obj/linux
 

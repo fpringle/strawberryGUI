@@ -4,7 +4,7 @@
 
 TEMPLATE = app
 TARGET = build/windows/chessGUI32
-INCLUDEPATH += . ../core
+INCLUDEPATH += . $$_PRO_FILE_PWD_/../core
 OBJECTS_DIR = obj/windows
 MOC_DIR = obj/linux
 

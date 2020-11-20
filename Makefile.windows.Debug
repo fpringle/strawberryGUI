@@ -273,12 +273,8 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 
 ####### Compile
 
-obj/windows/main.o: main.cpp boardGUI.h \
-		../core/board.h \
-		../core/move.h \
-		../core/typedefs.h \
-		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/QWidget \
-		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qwidget.h \
+obj/windows/main.o: main.cpp ../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/QApplication \
+		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qapplication.h \
 		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qtwidgetsglobal.h \
 		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qtguiglobal.h \
 		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qglobal.h \
@@ -304,21 +300,20 @@ obj/windows/main.o: main.cpp boardGUI.h \
 		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qversiontagging.h \
 		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qtgui-config.h \
 		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qtwidgets-config.h \
-		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qwindowdefs.h \
-		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qobjectdefs.h \
-		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qnamespace.h \
-		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qobjectdefs_impl.h \
-		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qwindowdefs_win.h \
-		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qobject.h \
+		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qcoreapplication.h \
 		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qstring.h \
 		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qchar.h \
 		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qbytearray.h \
 		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qrefcount.h \
+		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qnamespace.h \
 		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qarraydata.h \
 		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qstringliteral.h \
 		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qstringalgorithms.h \
 		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qstringview.h \
 		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qstringbuilder.h \
+		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qobject.h \
+		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qobjectdefs.h \
+		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qobjectdefs_impl.h \
 		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qlist.h \
 		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qalgorithms.h \
 		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qiterator.h \
@@ -337,10 +332,16 @@ obj/windows/main.o: main.cpp boardGUI.h \
 		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qvarlengtharray.h \
 		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qcontainerfwd.h \
 		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qobject_impl.h \
+		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qeventloop.h \
+		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qwindowdefs.h \
+		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qwindowdefs_win.h \
+		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qsize.h \
 		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qmargins.h \
+		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qcursor.h \
+		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qdesktopwidget.h \
+		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qwidget.h \
 		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qpaintdevice.h \
 		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qrect.h \
-		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qsize.h \
 		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qpalette.h \
 		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qcolor.h \
 		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qrgb.h \
@@ -364,7 +365,6 @@ obj/windows/main.o: main.cpp boardGUI.h \
 		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qfontmetrics.h \
 		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qfontinfo.h \
 		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qsizepolicy.h \
-		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qcursor.h \
 		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qkeysequence.h \
 		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qevent.h \
 		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qvariant.h \
@@ -380,6 +380,18 @@ obj/windows/main.o: main.cpp boardGUI.h \
 		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qfiledevice.h \
 		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qvector2d.h \
 		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qtouchdevice.h \
+		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qguiapplication.h \
+		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qinputmethod.h \
+		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/QGridLayout \
+		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qgridlayout.h \
+		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qlayout.h \
+		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qlayoutitem.h \
+		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qboxlayout.h \
+		boardGUI.h \
+		../core/board.h \
+		../core/move.h \
+		../core/typedefs.h \
+		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/QWidget \
 		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/QPushButton \
 		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qpushbutton.h \
 		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qabstractbutton.h \
@@ -389,11 +401,6 @@ obj/windows/main.o: main.cpp boardGUI.h \
 		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/QLabel \
 		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qlabel.h \
 		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qframe.h \
-		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/QGridLayout \
-		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qgridlayout.h \
-		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qlayout.h \
-		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qlayoutitem.h \
-		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qboxlayout.h \
 		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/QTextEdit \
 		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qtextedit.h \
 		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qabstractscrollarea.h \
@@ -402,17 +409,11 @@ obj/windows/main.o: main.cpp boardGUI.h \
 		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qtextcursor.h \
 		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qtextformat.h \
 		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qpen.h \
+		../core/init.h \
+		initGUI.h \
 		playerGUI.h \
 		../core/play.h \
-		../core/tree.h \
-		../core/init.h \
-		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/QApplication \
-		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qapplication.h \
-		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qcoreapplication.h \
-		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtCore/qeventloop.h \
-		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtWidgets/qdesktopwidget.h \
-		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qguiapplication.h \
-		../../../../Downloads/mxe/usr/i686-w64-mingw32.static/qt5/include/QtGui/qinputmethod.h
+		../core/tree.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/windows/main.o main.cpp
 
 obj/windows/boardGUI.o: boardGUI.cpp boardGUI.h \

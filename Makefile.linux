@@ -503,6 +503,10 @@ obj/linux/infoGUI.o: infoGUI.cpp infoGUI.h \
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/linux/infoGUI.o infoGUI.cpp
 
 obj/linux/initGUI.o: initGUI.cpp initGUI.h \
+		boardGUI.h \
+		../core/board.h \
+		../core/move.h \
+		../core/typedefs.h \
 		../core/init.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/linux/initGUI.o initGUI.cpp
 
