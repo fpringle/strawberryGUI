@@ -6,7 +6,7 @@ namespace chessGUI {
 
 
 void WorkerThread::run() {
-    chessCore::move_t move = player->search(100);
+    chessCore::move_t move = player->iterative_deepening(30);
     emit resultReady(move);
 }
 

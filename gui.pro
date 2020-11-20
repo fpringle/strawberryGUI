@@ -3,18 +3,16 @@
 ######################################################################
 
 TEMPLATE = app
-TARGET = build/windows/chessGUI32
-INCLUDEPATH += . $$_PRO_FILE_PWD_/../core
-OBJECTS_DIR = obj/windows
-MOC_DIR = obj/linux
+TARGET = build/strawberryGUI
+INCLUDEPATH += $$_PRO_FILE_PWD_/../core
+OBJECTS_DIR = obj
+MOC_DIR = obj
 
 # The following define makes your compiler warn you if you use any
 # feature of Qt which has been marked as deprecated (the exact warnings
 # depend on your compiler). Please consult the documentation of the
 # deprecated API in order to know how to port your code away from it.
 DEFINES += QT_DEPRECATED_WARNINGS
-
-QMAKE_CXXFLAGS += -std=gnu++11
 
 # You can also make your code fail to compile if you use deprecated APIs.
 # In order to do so, uncomment the following line.
@@ -25,6 +23,7 @@ QMAKE_CXXFLAGS += -std=gnu++11
 HEADERS += boardGUI.h \
            chessthread.h \
            infoGUI.h \
+           initGUI.h \
            playerGUI.h \
            promotion.h \
            ../core/action.h \
@@ -43,9 +42,9 @@ HEADERS += boardGUI.h \
            playerGUI.h
 SOURCES += main.cpp \
            boardGUI.cpp \
-#           chessgui32_plugin_import.cpp \
            chessthread.cpp \
            infoGUI.cpp \
+           initGUI.cpp \
            playerGUI.cpp \
            promotion.cpp \
            ../core/action.cpp \
