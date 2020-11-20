@@ -56,6 +56,7 @@ SOURCES       = main.cpp \
 		boardGUI.cpp \
 		chessthread.cpp \
 		infoGUI.cpp \
+		initGUI.cpp \
 		playerGUI.cpp \
 		promotion.cpp \
 		../core/action.cpp \
@@ -67,11 +68,13 @@ SOURCES       = main.cpp \
 		../core/move.cpp \
 		../core/play.cpp \
 		../core/search.cpp \
-		../core/twiddle.cpp obj/linux/moc_chessthread.cpp
+		../core/twiddle.cpp qrc_icons.cpp \
+		obj/linux/moc_chessthread.cpp
 OBJECTS       = obj/linux/main.o \
 		obj/linux/boardGUI.o \
 		obj/linux/chessthread.o \
 		obj/linux/infoGUI.o \
+		obj/linux/initGUI.o \
 		obj/linux/playerGUI.o \
 		obj/linux/promotion.o \
 		obj/linux/action.o \
@@ -84,6 +87,7 @@ OBJECTS       = obj/linux/main.o \
 		obj/linux/play.o \
 		obj/linux/search.o \
 		obj/linux/twiddle.o \
+		obj/linux/qrc_icons.o \
 		obj/linux/moc_chessthread.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
@@ -128,6 +132,7 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_service_support_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_sql.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_sql_private.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_svg.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_testlib.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_testlib_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_theme_support_private.pri \
@@ -163,6 +168,7 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		chessGUI.pro boardGUI.h \
 		chessthread.h \
 		infoGUI.h \
+		initGUI.h \
 		playerGUI.h \
 		promotion.h \
 		../core/action.h \
@@ -182,6 +188,7 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		boardGUI.cpp \
 		chessthread.cpp \
 		infoGUI.cpp \
+		initGUI.cpp \
 		playerGUI.cpp \
 		promotion.cpp \
 		../core/action.cpp \
@@ -249,6 +256,7 @@ Makefile.linux: chessGUI.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qma
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_service_support_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_sql.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_sql_private.pri \
+		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_svg.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_testlib.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_testlib_private.pri \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_theme_support_private.pri \
@@ -281,7 +289,8 @@ Makefile.linux: chessGUI.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qma
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/exceptions.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf \
-		chessGUI.pro
+		chessGUI.pro \
+		icons.qrc
 	$(QMAKE) -o Makefile.linux chessGUI.pro
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf:
@@ -326,6 +335,7 @@ Makefile.linux: chessGUI.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qma
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_service_support_private.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_sql.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_sql_private.pri:
+/usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_svg.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_testlib.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_testlib_private.pri:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/modules/qt_lib_theme_support_private.pri:
@@ -359,6 +369,7 @@ Makefile.linux: chessGUI.pro /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++/qma
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/yacc.prf:
 /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/lex.prf:
 chessGUI.pro:
+icons.qrc:
 qmake: FORCE
 	@$(QMAKE) -o Makefile.linux chessGUI.pro
 
@@ -373,9 +384,10 @@ dist: distdir FORCE
 distdir: FORCE
 	@test -d $(DISTDIR) || mkdir -p $(DISTDIR)
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
+	$(COPY_FILE) --parents icons.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents boardGUI.h chessthread.h infoGUI.h playerGUI.h promotion.h ../core/action.h ../core/board.h ../core/eval.h ../core/hash.h ../core/init.h ../core/move.h ../core/play.h ../core/search.h ../core/tree.h ../core/twiddle.h ../core/typedefs.h boardGUI.h infoGUI.h playerGUI.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp boardGUI.cpp chessthread.cpp infoGUI.cpp playerGUI.cpp promotion.cpp ../core/action.cpp ../core/board.cpp ../core/check.cpp ../core/eval.cpp ../core/hash.cpp ../core/init.cpp ../core/move.cpp ../core/play.cpp ../core/search.cpp ../core/twiddle.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents boardGUI.h chessthread.h infoGUI.h initGUI.h playerGUI.h promotion.h ../core/action.h ../core/board.h ../core/eval.h ../core/hash.h ../core/init.h ../core/move.h ../core/play.h ../core/search.h ../core/tree.h ../core/twiddle.h ../core/typedefs.h boardGUI.h infoGUI.h playerGUI.h $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp boardGUI.cpp chessthread.cpp infoGUI.cpp initGUI.cpp playerGUI.cpp promotion.cpp ../core/action.cpp ../core/board.cpp ../core/check.cpp ../core/eval.cpp ../core/hash.cpp ../core/init.cpp ../core/move.cpp ../core/play.cpp ../core/search.cpp ../core/twiddle.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -399,8 +411,25 @@ check: first
 
 benchmark: first
 
-compiler_rcc_make_all:
+compiler_rcc_make_all: qrc_icons.cpp
 compiler_rcc_clean:
+	-$(DEL_FILE) qrc_icons.cpp
+qrc_icons.cpp: icons.qrc \
+		/usr/lib/qt5/bin/rcc \
+		icons/wb.svg \
+		icons/bk.svg \
+		icons/bb.svg \
+		icons/wn.svg \
+		icons/wr.svg \
+		icons/bn.svg \
+		icons/br.svg \
+		icons/wq.svg \
+		icons/bq.svg \
+		icons/wp.svg \
+		icons/bp.svg \
+		icons/wk.svg
+	/usr/lib/qt5/bin/rcc -name icons icons.qrc -o qrc_icons.cpp
+
 compiler_moc_predefs_make_all: obj/linux/moc_predefs.h
 compiler_moc_predefs_clean:
 	-$(DEL_FILE) obj/linux/moc_predefs.h
@@ -432,7 +461,7 @@ compiler_yacc_impl_make_all:
 compiler_yacc_impl_clean:
 compiler_lex_make_all:
 compiler_lex_clean:
-compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean 
+compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_header_clean 
 
 ####### Compile
 
@@ -441,10 +470,11 @@ obj/linux/main.o: main.cpp boardGUI.h \
 		../core/move.h \
 		../core/typedefs.h \
 		infoGUI.h \
+		../core/init.h \
+		initGUI.h \
 		playerGUI.h \
 		../core/play.h \
-		../core/tree.h \
-		../core/init.h
+		../core/tree.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/linux/main.o main.cpp
 
 obj/linux/boardGUI.o: boardGUI.cpp boardGUI.h \
@@ -471,6 +501,10 @@ obj/linux/infoGUI.o: infoGUI.cpp infoGUI.h \
 		../core/move.h \
 		../core/typedefs.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/linux/infoGUI.o infoGUI.cpp
+
+obj/linux/initGUI.o: initGUI.cpp initGUI.h \
+		../core/init.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/linux/initGUI.o initGUI.cpp
 
 obj/linux/playerGUI.o: playerGUI.cpp playerGUI.h \
 		boardGUI.h \
@@ -565,6 +599,9 @@ obj/linux/twiddle.o: ../core/twiddle.cpp ../core/twiddle.h \
 		../core/typedefs.h \
 		../core/move.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/linux/twiddle.o ../core/twiddle.cpp
+
+obj/linux/qrc_icons.o: qrc_icons.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/linux/qrc_icons.o qrc_icons.cpp
 
 obj/linux/moc_chessthread.o: obj/linux/moc_chessthread.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/linux/moc_chessthread.o obj/linux/moc_chessthread.cpp

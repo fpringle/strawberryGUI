@@ -16,7 +16,7 @@ using bitboard = uint64_t;
 namespace chessGUI {
 
 
-extern const QIcon pieceIcons[13];
+extern QIcon pieceIcons[13];
 
 
 class ChessSquare : public QPushButton {

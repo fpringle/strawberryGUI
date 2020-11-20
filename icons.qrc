@@ -1,0 +1,16 @@
+<!DOCTYPE RCC><RCC version="1.0">
+<qresource>
+    <file>icons/bb.svg</file>
+    <file>icons/bk.svg</file>
+    <file>icons/bn.svg</file>
+    <file>icons/bp.svg</file>
+    <file>icons/bq.svg</file>
+    <file>icons/br.svg</file>
+    <file>icons/wb.svg</file>
+    <file>icons/wk.svg</file>
+    <file>icons/wn.svg</file>
+    <file>icons/wp.svg</file>
+    <file>icons/wq.svg</file>
+    <file>icons/wr.svg</file>
+</qresource>
+</RCC>

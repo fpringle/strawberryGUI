@@ -1,25 +1,26 @@
 #include "boardGUI.h"
 #include "playerGUI.h"
 #include <QGridLayout>
+//#include <QtSvg>
 
 
 namespace chessGUI {
 
 
-const QIcon pieceIcons[13] = {
-    QIcon("icons/wp.svg"),
-    QIcon("icons/wr.svg"),
-    QIcon("icons/wn.svg"),
-    QIcon("icons/wb.svg"),
-    QIcon("icons/wq.svg"),
-    QIcon("icons/wk.svg"),
+QIcon pieceIcons[13] = {
+    QIcon(),
+    QIcon(),
+    QIcon(),
+    QIcon(),
+    QIcon(),
+    QIcon(),
 
-    QIcon("icons/bp.svg"),
-    QIcon("icons/br.svg"),
-    QIcon("icons/bn.svg"),
-    QIcon("icons/bb.svg"),
-    QIcon("icons/bq.svg"),
-    QIcon("icons/bk.svg"),
+    QIcon(),
+    QIcon(),
+    QIcon(),
+    QIcon(),
+    QIcon(),
+    QIcon(),
     QIcon()
 };
 

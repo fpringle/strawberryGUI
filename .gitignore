@@ -7,3 +7,5 @@ __pycache__
 *.o
 *.o.d
 .qmake*
+*.zip
+qrc_icons.cpp

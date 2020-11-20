@@ -43,7 +43,7 @@ HEADERS += boardGUI.h \
            playerGUI.h
 SOURCES += main.cpp \
            boardGUI.cpp \
-           chessgui32_plugin_import.cpp \
+#           chessgui32_plugin_import.cpp \
            chessthread.cpp \
            infoGUI.cpp \
            playerGUI.cpp \
@@ -60,3 +60,5 @@ SOURCES += main.cpp \
            ../core/twiddle.cpp
 
 QT += widgets
+
+RESOURCES = icons.qrc

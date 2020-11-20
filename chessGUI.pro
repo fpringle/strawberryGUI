@@ -23,6 +23,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 HEADERS += boardGUI.h \
            chessthread.h \
            infoGUI.h \
+           initGUI.h \
            playerGUI.h \
            promotion.h \
            ../core/action.h \
@@ -43,6 +44,7 @@ SOURCES += main.cpp \
            boardGUI.cpp \
            chessthread.cpp \
            infoGUI.cpp \
+           initGUI.cpp \
            playerGUI.cpp \
            promotion.cpp \
            ../core/action.cpp \
@@ -57,3 +59,5 @@ SOURCES += main.cpp \
            ../core/twiddle.cpp
 
 QT += widgets
+
+RESOURCES = icons.qrc
