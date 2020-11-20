@@ -5,6 +5,8 @@
 TEMPLATE = app
 TARGET = build/windows/chessGUI32
 INCLUDEPATH += . ../core
+OBJECTS_DIR = obj/windows
+MOC_DIR = obj/linux
 
 # The following define makes your compiler warn you if you use any
 # feature of Qt which has been marked as deprecated (the exact warnings

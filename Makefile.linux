@@ -17,7 +17,7 @@ CXX           = g++
 DEFINES       = -DQT_DEPRECATED_WARNINGS -DQT_NO_DEBUG -DQT_WIDGETS_LIB -DQT_GUI_LIB -DQT_CORE_LIB
 CFLAGS        = -pipe -O2 -Wall -W -D_REENTRANT -fPIC $(DEFINES)
 CXXFLAGS      = -pipe -O2 -Wall -W -D_REENTRANT -fPIC $(DEFINES)
-INCPATH       = -I. -I. -I../core -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt5/QtGui -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -I. -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++
+INCPATH       = -I. -I. -I../core -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt5/QtGui -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -Iobj/linux -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++
 QMAKE         = /usr/lib/qt5/bin/qmake
 DEL_FILE      = rm -f
 CHK_DIR_EXISTS= test -d
@@ -37,7 +37,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = chessGUI1.0.0
-DISTDIR = /home/freddy/Documents/cpl/chess_net/gui/.tmp/chessGUI1.0.0
+DISTDIR = /home/freddy/Documents/cpl/chess_net/gui/obj/linux/chessGUI1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-O1
 LIBS          = $(SUBLIBS) /usr/lib/x86_64-linux-gnu/libQt5Widgets.so /usr/lib/x86_64-linux-gnu/libQt5Gui.so /usr/lib/x86_64-linux-gnu/libQt5Core.so /usr/lib/x86_64-linux-gnu/libGL.so -lpthread   
@@ -48,7 +48,7 @@ STRIP         = strip
 
 ####### Output directory
 
-OBJECTS_DIR   = ./
+OBJECTS_DIR   = obj/linux/
 
 ####### Files
 
@@ -67,24 +67,24 @@ SOURCES       = main.cpp \
 		../core/move.cpp \
 		../core/play.cpp \
 		../core/search.cpp \
-		../core/twiddle.cpp moc_chessthread.cpp
-OBJECTS       = main.o \
-		boardGUI.o \
-		chessthread.o \
-		infoGUI.o \
-		playerGUI.o \
-		promotion.o \
-		action.o \
-		board.o \
-		check.o \
-		eval.o \
-		hash.o \
-		init.o \
-		move.o \
-		play.o \
-		search.o \
-		twiddle.o \
-		moc_chessthread.o
+		../core/twiddle.cpp obj/linux/moc_chessthread.cpp
+OBJECTS       = obj/linux/main.o \
+		obj/linux/boardGUI.o \
+		obj/linux/chessthread.o \
+		obj/linux/infoGUI.o \
+		obj/linux/playerGUI.o \
+		obj/linux/promotion.o \
+		obj/linux/action.o \
+		obj/linux/board.o \
+		obj/linux/check.o \
+		obj/linux/eval.o \
+		obj/linux/hash.o \
+		obj/linux/init.o \
+		obj/linux/move.o \
+		obj/linux/play.o \
+		obj/linux/search.o \
+		obj/linux/twiddle.o \
+		obj/linux/moc_chessthread.o
 DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/unix.conf \
 		/usr/lib/x86_64-linux-gnu/qt5/mkspecs/common/linux.conf \
@@ -401,24 +401,24 @@ benchmark: first
 
 compiler_rcc_make_all:
 compiler_rcc_clean:
-compiler_moc_predefs_make_all: moc_predefs.h
+compiler_moc_predefs_make_all: obj/linux/moc_predefs.h
 compiler_moc_predefs_clean:
-	-$(DEL_FILE) moc_predefs.h
-moc_predefs.h: /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
-	g++ -pipe -O2 -Wall -W -dM -E -o moc_predefs.h /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
+	-$(DEL_FILE) obj/linux/moc_predefs.h
+obj/linux/moc_predefs.h: /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
+	g++ -pipe -O2 -Wall -W -dM -E -o obj/linux/moc_predefs.h /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp
 
-compiler_moc_header_make_all: moc_chessthread.cpp
+compiler_moc_header_make_all: obj/linux/moc_chessthread.cpp
 compiler_moc_header_clean:
-	-$(DEL_FILE) moc_chessthread.cpp
-moc_chessthread.cpp: chessthread.h \
+	-$(DEL_FILE) obj/linux/moc_chessthread.cpp
+obj/linux/moc_chessthread.cpp: chessthread.h \
 		../core/play.h \
 		../core/board.h \
-		../core/typedefs.h \
 		../core/move.h \
+		../core/typedefs.h \
 		../core/tree.h \
-		moc_predefs.h \
+		obj/linux/moc_predefs.h \
 		/usr/lib/qt5/bin/moc
-	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/freddy/Documents/cpl/chess_net/gui/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/freddy/Documents/cpl/chess_net/gui -I/home/freddy/Documents/cpl/chess_net/gui -I/home/freddy/Documents/cpl/chess_net/core -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include chessthread.h -o moc_chessthread.cpp
+	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/freddy/Documents/cpl/chess_net/gui/obj/linux/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/freddy/Documents/cpl/chess_net/gui -I/home/freddy/Documents/cpl/chess_net/gui -I/home/freddy/Documents/cpl/chess_net/core -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include chessthread.h -o obj/linux/moc_chessthread.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -436,138 +436,138 @@ compiler_clean: compiler_moc_predefs_clean compiler_moc_header_clean
 
 ####### Compile
 
-main.o: main.cpp boardGUI.h \
+obj/linux/main.o: main.cpp boardGUI.h \
 		../core/board.h \
-		../core/typedefs.h \
 		../core/move.h \
+		../core/typedefs.h \
 		infoGUI.h \
 		playerGUI.h \
 		../core/play.h \
 		../core/tree.h \
 		../core/init.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o main.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/linux/main.o main.cpp
 
-boardGUI.o: boardGUI.cpp boardGUI.h \
+obj/linux/boardGUI.o: boardGUI.cpp boardGUI.h \
 		../core/board.h \
-		../core/typedefs.h \
 		../core/move.h \
+		../core/typedefs.h \
 		playerGUI.h \
 		infoGUI.h \
 		../core/play.h \
 		../core/tree.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o boardGUI.o boardGUI.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/linux/boardGUI.o boardGUI.cpp
 
-chessthread.o: chessthread.cpp chessthread.h \
+obj/linux/chessthread.o: chessthread.cpp chessthread.h \
 		../core/play.h \
 		../core/board.h \
-		../core/typedefs.h \
 		../core/move.h \
+		../core/typedefs.h \
 		../core/tree.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o chessthread.o chessthread.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/linux/chessthread.o chessthread.cpp
 
-infoGUI.o: infoGUI.cpp infoGUI.h \
+obj/linux/infoGUI.o: infoGUI.cpp infoGUI.h \
 		boardGUI.h \
 		../core/board.h \
-		../core/typedefs.h \
-		../core/move.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o infoGUI.o infoGUI.cpp
-
-playerGUI.o: playerGUI.cpp playerGUI.h \
-		boardGUI.h \
-		../core/board.h \
-		../core/typedefs.h \
 		../core/move.h \
+		../core/typedefs.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/linux/infoGUI.o infoGUI.cpp
+
+obj/linux/playerGUI.o: playerGUI.cpp playerGUI.h \
+		boardGUI.h \
+		../core/board.h \
+		../core/move.h \
+		../core/typedefs.h \
 		infoGUI.h \
 		../core/play.h \
 		../core/tree.h \
 		chessthread.h \
 		promotion.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o playerGUI.o playerGUI.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/linux/playerGUI.o playerGUI.cpp
 
-promotion.o: promotion.cpp boardGUI.h \
+obj/linux/promotion.o: promotion.cpp boardGUI.h \
 		../core/board.h \
-		../core/typedefs.h \
 		../core/move.h \
+		../core/typedefs.h \
 		promotion.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o promotion.o promotion.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/linux/promotion.o promotion.cpp
 
-action.o: ../core/action.cpp ../core/action.h \
+obj/linux/action.o: ../core/action.cpp ../core/action.h \
 		../core/board.h \
-		../core/typedefs.h \
 		../core/move.h \
-		../core/twiddle.h \
+		../core/typedefs.h \
 		../core/eval.h \
 		../core/hash.h \
-		../core/play.h \
-		../core/tree.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o action.o ../core/action.cpp
-
-board.o: ../core/board.cpp ../core/board.h \
-		../core/typedefs.h \
-		../core/move.h \
-		../core/twiddle.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o board.o ../core/board.cpp
-
-check.o: ../core/check.cpp ../core/board.h \
-		../core/typedefs.h \
-		../core/move.h \
-		../core/twiddle.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o check.o ../core/check.cpp
-
-eval.o: ../core/eval.cpp ../core/board.h \
-		../core/typedefs.h \
-		../core/move.h \
-		../core/eval.h \
-		../core/twiddle.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o eval.o ../core/eval.cpp
-
-hash.o: ../core/hash.cpp ../core/board.h \
-		../core/typedefs.h \
-		../core/move.h \
-		../core/hash.h \
-		../core/twiddle.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o hash.o ../core/hash.cpp
-
-init.o: ../core/init.cpp ../core/board.h \
-		../core/typedefs.h \
-		../core/move.h \
-		../core/init.h \
-		../core/hash.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o init.o ../core/init.cpp
-
-move.o: ../core/move.cpp ../core/board.h \
-		../core/typedefs.h \
-		../core/move.h \
-		../core/twiddle.h \
-		../core/action.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o move.o ../core/move.cpp
-
-play.o: ../core/play.cpp ../core/board.h \
-		../core/typedefs.h \
-		../core/move.h \
 		../core/play.h \
 		../core/tree.h \
-		../core/action.h \
-		../core/search.h \
-		../core/init.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o play.o ../core/play.cpp
+		../core/twiddle.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/linux/action.o ../core/action.cpp
 
-search.o: ../core/search.cpp ../core/board.h \
-		../core/typedefs.h \
+obj/linux/board.o: ../core/board.cpp ../core/board.h \
 		../core/move.h \
-		../core/action.h \
-		../core/search.h \
-		../core/play.h \
-		../core/tree.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o search.o ../core/search.cpp
-
-twiddle.o: ../core/twiddle.cpp ../core/move.h \
 		../core/typedefs.h \
 		../core/twiddle.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o twiddle.o ../core/twiddle.cpp
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/linux/board.o ../core/board.cpp
 
-moc_chessthread.o: moc_chessthread.cpp 
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o moc_chessthread.o moc_chessthread.cpp
+obj/linux/check.o: ../core/check.cpp ../core/board.h \
+		../core/move.h \
+		../core/typedefs.h \
+		../core/twiddle.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/linux/check.o ../core/check.cpp
+
+obj/linux/eval.o: ../core/eval.cpp ../core/eval.h \
+		../core/typedefs.h \
+		../core/board.h \
+		../core/move.h \
+		../core/twiddle.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/linux/eval.o ../core/eval.cpp
+
+obj/linux/hash.o: ../core/hash.cpp ../core/hash.h \
+		../core/board.h \
+		../core/move.h \
+		../core/typedefs.h \
+		../core/twiddle.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/linux/hash.o ../core/hash.cpp
+
+obj/linux/init.o: ../core/init.cpp ../core/init.h \
+		../core/board.h \
+		../core/move.h \
+		../core/typedefs.h \
+		../core/hash.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/linux/init.o ../core/init.cpp
+
+obj/linux/move.o: ../core/move.cpp ../core/move.h \
+		../core/typedefs.h \
+		../core/action.h \
+		../core/board.h \
+		../core/twiddle.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/linux/move.o ../core/move.cpp
+
+obj/linux/play.o: ../core/play.cpp ../core/play.h \
+		../core/board.h \
+		../core/move.h \
+		../core/typedefs.h \
+		../core/tree.h \
+		../core/action.h \
+		../core/init.h \
+		../core/search.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/linux/play.o ../core/play.cpp
+
+obj/linux/search.o: ../core/search.cpp ../core/search.h \
+		../core/board.h \
+		../core/move.h \
+		../core/typedefs.h \
+		../core/action.h \
+		../core/play.h \
+		../core/tree.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/linux/search.o ../core/search.cpp
+
+obj/linux/twiddle.o: ../core/twiddle.cpp ../core/twiddle.h \
+		../core/typedefs.h \
+		../core/move.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/linux/twiddle.o ../core/twiddle.cpp
+
+obj/linux/moc_chessthread.o: obj/linux/moc_chessthread.cpp 
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/linux/moc_chessthread.o obj/linux/moc_chessthread.cpp
 
 ####### Install
 
