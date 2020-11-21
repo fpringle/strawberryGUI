@@ -39,7 +39,7 @@ COMPRESS      = gzip -9f
 DISTNAME      = strawberryGUI1.0.0
 DISTDIR = /home/freddy/Documents/cpl/strawberry/src/gui/obj/unix/strawberryGUI1.0.0
 LINK          = g++
-LFLAGS        = -Wl,-O1
+LFLAGS        = -DUSE_CONFIG_FILE=1 -Wl,-O1
 LIBS          = $(SUBLIBS) ../core/obj/action.o ../core/obj/board.o ../core/obj/check.o ../core/obj/eval.o ../core/obj/hash.o ../core/obj/init.o ../core/obj/move.o ../core/obj/play.o ../core/obj/search.o ../core/obj/twiddle.o /usr/lib/x86_64-linux-gnu/libQt5Widgets.so /usr/lib/x86_64-linux-gnu/libQt5Gui.so /usr/lib/x86_64-linux-gnu/libQt5Core.so /usr/lib/x86_64-linux-gnu/libGL.so -lpthread   
 AR            = ar cqs
 RANLIB        = 

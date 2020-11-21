@@ -22,6 +22,7 @@ PlayerGUI::PlayerGUI(QWidget* parent) : QWidget(parent) {
 //    qRegisterMetaType<chessCore::colour>();
     downSide = choose->choose();
     player = new chessCore::Player();
+    player->read_config("config.toml");
     qRegisterMetaType<chessCore::move_t>();
     initGraphics();
     updateBoard();
