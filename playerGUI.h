@@ -20,7 +20,8 @@ private:
     InfoPane *info;
     chessCore::colour downSide;
 public:
-    PlayerGUI(chessCore::colour side, QWidget *parent=0);
+    PlayerGUI(QWidget* parent=0);
+    PlayerGUI(chessCore::colour side, QWidget* parent=0);
     PlayerGUI(chessCore::colour side, chessCore::bitboard*,
               bool*, bool, int, uint8_t, uint8_t,
               chessCore::colour, chessCore::value_t, chessCore::value_t,
@@ -33,6 +34,7 @@ public:
     void updateHistory();
     void compMove();
     chessCore::move_t whichPromotion(chessCore::move_t prom);
+    void play();
 };
 
 

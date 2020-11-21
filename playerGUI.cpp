@@ -1,19 +1,31 @@
 #include "playerGUI.h"
-#include "chessthread.h"
-#include "promotion.h"
 
-#include "board.h"
+#include <vector>
+#include <sstream>
 
 #include <QGridLayout>
 #include <QThread>
 #include <QCoreApplication>
 
-#include <vector>
-#include <sstream>
+#include "chessthread.h"
+#include "promotion.h"
+#include "chooseColour.h"
+#include "board.h"
+
 
 
 namespace chessGUI {
 
+
+PlayerGUI::PlayerGUI(QWidget* parent) : QWidget(parent) {
+    ColourDialog* choose = new ColourDialog(this);
+//    qRegisterMetaType<chessCore::colour>();
+    downSide = choose->choose();
+    player = new chessCore::Player();
+    qRegisterMetaType<chessCore::move_t>();
+    initGraphics();
+    updateBoard();
+}
 
 PlayerGUI::PlayerGUI(chessCore::colour side, QWidget *parent) : QWidget(parent) {
     downSide = side;
@@ -150,6 +162,12 @@ chessCore::move_t PlayerGUI::whichPromotion(chessCore::move_t prom) {
     chessCore::piece pc = dlg->choose();
     prom.set_promotion(pc);
     return prom;
+}
+
+void PlayerGUI::play() {
+    chessCore::colour side_to_move;
+    player->getSide(&side_to_move);
+    if (downSide != side_to_move) compMove();
 }
 
 } // end of chessGUI namespace

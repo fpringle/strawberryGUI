@@ -22,6 +22,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 # Input
 HEADERS += boardGUI.h \
            chessthread.h \
+           chooseColour.h \
            infoGUI.h \
            initGUI.h \
            playerGUI.h \
@@ -43,6 +44,7 @@ HEADERS += boardGUI.h \
 SOURCES += main.cpp \
            boardGUI.cpp \
            chessthread.cpp \
+           chooseColour.cpp \
            infoGUI.cpp \
            initGUI.cpp \
            playerGUI.cpp \

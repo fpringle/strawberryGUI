@@ -10,6 +10,7 @@ namespace chessGUI {
 
 PromotionDialog::PromotionDialog(chessCore::colour side, QWidget *parent)
         : QDialog(parent) {
+    setWindowTitle("Choose a piece");
     chosenPiece = chessCore::pawn;
 
     QGridLayout * grid = new QGridLayout(this);
