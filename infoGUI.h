@@ -11,18 +11,49 @@
 
 namespace chessGUI {
 
-
+/**
+ *  \class InfoPane
+ *  \brief Information panel
+ *
+ *  A GUI panel to display more information about the board, such as
+ *  the move history and the castling rights.
+ */
 class InfoPane : public QWidget {
 private:
-    QGridLayout *grid;
+    /** An array of labels indicating the castling rights. */
     QPushButton *castlingRightsLabels[4];
-    QGridLayout *castlingRightsLayout;
+    /** A text box to display the move history. */
     QTextEdit *moveHistory;
+    /** A text box to display general information. */
     QTextEdit *miscInfo;
 public:
+    /**
+     *  \brief The default constructor for InfoPane.
+     *
+     *  \param parent           A reference to the parent QWidget object.
+     */
     InfoPane(QWidget *parent=0);
+
+    /**
+     *  Update the \ref castlingRightsLabels.
+     *
+     *  \param rights           An array of booleans representing the
+     *                          castling rights.
+     */
     void setCastlingRights(bool *rights);
+
+    /**
+     *  Update the \ref moveHistory text box.
+     *
+     *  \param s                A string containing the move history.
+     */
     void updateHistory(std::string s);
+
+    /**
+     *  Update the \ref miscInfo text box.
+     *
+     *  \param s                A string containing the text to display.
+     */
     void setMiscText(std::string s);
 };
 

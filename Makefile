@@ -55,31 +55,31 @@ OBJECTS_DIR   = obj/unix/
 SOURCES       = main.cpp \
 		boardGUI.cpp \
 		chessthread.cpp \
-		chooseColour.cpp \
+		colourDialog.cpp \
 		infoGUI.cpp \
 		initGUI.cpp \
 		playerGUI.cpp \
-		promotion.cpp qrc_icons.cpp \
+		promotionDialog.cpp qrc_icons.cpp \
 		obj/unix/moc_chessthread.cpp
 OBJECTS       = obj/unix/main.o \
 		obj/unix/boardGUI.o \
 		obj/unix/chessthread.o \
-		obj/unix/chooseColour.o \
+		obj/unix/colourDialog.o \
 		obj/unix/infoGUI.o \
 		obj/unix/initGUI.o \
 		obj/unix/playerGUI.o \
-		obj/unix/promotion.o \
+		obj/unix/promotionDialog.o \
 		obj/unix/qrc_icons.o \
 		obj/unix/moc_chessthread.o
 DIST          = ../../.qmake.conf \
 		../../.qmake.stash \
 		gui.pro boardGUI.h \
 		chessthread.h \
-		chooseColour.h \
+		colourDialog.h \
 		infoGUI.h \
 		initGUI.h \
 		playerGUI.h \
-		promotion.h \
+		promotionDialog.h \
 		../core/action.h \
 		../core/board.h \
 		../core/eval.h \
@@ -96,11 +96,11 @@ DIST          = ../../.qmake.conf \
 		playerGUI.h main.cpp \
 		boardGUI.cpp \
 		chessthread.cpp \
-		chooseColour.cpp \
+		colourDialog.cpp \
 		infoGUI.cpp \
 		initGUI.cpp \
 		playerGUI.cpp \
-		promotion.cpp
+		promotionDialog.cpp
 QMAKE_TARGET  = strawberryGUI
 DESTDIR       = build/unix/
 TARGET        = build/unix/strawberryGUI
@@ -288,8 +288,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents icons.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents boardGUI.h chessthread.h chooseColour.h infoGUI.h initGUI.h playerGUI.h promotion.h ../core/action.h ../core/board.h ../core/eval.h ../core/hash.h ../core/init.h ../core/move.h ../core/play.h ../core/search.h ../core/tree.h ../core/twiddle.h ../core/typedefs.h boardGUI.h infoGUI.h playerGUI.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp boardGUI.cpp chessthread.cpp chooseColour.cpp infoGUI.cpp initGUI.cpp playerGUI.cpp promotion.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents boardGUI.h chessthread.h colourDialog.h infoGUI.h initGUI.h playerGUI.h promotionDialog.h ../core/action.h ../core/board.h ../core/eval.h ../core/hash.h ../core/init.h ../core/move.h ../core/play.h ../core/search.h ../core/tree.h ../core/twiddle.h ../core/typedefs.h boardGUI.h infoGUI.h playerGUI.h $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp boardGUI.cpp chessthread.cpp colourDialog.cpp infoGUI.cpp initGUI.cpp playerGUI.cpp promotionDialog.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -426,12 +426,12 @@ obj/unix/chessthread.o: chessthread.cpp chessthread.h \
 		../core/tree.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/unix/chessthread.o chessthread.cpp
 
-obj/unix/chooseColour.o: chooseColour.cpp boardGUI.h \
+obj/unix/colourDialog.o: colourDialog.cpp boardGUI.h \
 		../core/board.h \
 		../core/move.h \
 		../core/typedefs.h \
-		chooseColour.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/unix/chooseColour.o chooseColour.cpp
+		colourDialog.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/unix/colourDialog.o colourDialog.cpp
 
 obj/unix/infoGUI.o: infoGUI.cpp infoGUI.h \
 		boardGUI.h \
@@ -457,16 +457,16 @@ obj/unix/playerGUI.o: playerGUI.cpp playerGUI.h \
 		../core/play.h \
 		../core/tree.h \
 		chessthread.h \
-		promotion.h \
-		chooseColour.h
+		promotionDialog.h \
+		colourDialog.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/unix/playerGUI.o playerGUI.cpp
 
-obj/unix/promotion.o: promotion.cpp boardGUI.h \
+obj/unix/promotionDialog.o: promotionDialog.cpp boardGUI.h \
 		../core/board.h \
 		../core/move.h \
 		../core/typedefs.h \
-		promotion.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/unix/promotion.o promotion.cpp
+		promotionDialog.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/unix/promotionDialog.o promotionDialog.cpp
 
 obj/unix/qrc_icons.o: qrc_icons.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/unix/qrc_icons.o qrc_icons.cpp

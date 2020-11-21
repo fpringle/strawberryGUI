@@ -51,11 +51,11 @@ ICON = icons/icon.ico
 # Input
 HEADERS += boardGUI.h \
            chessthread.h \
-           chooseColour.h \
+           colourDialog.h \
            infoGUI.h \
            initGUI.h \
            playerGUI.h \
-           promotion.h \
+           promotionDialog.h \
            ../core/action.h \
            ../core/board.h \
            ../core/eval.h \
@@ -73,11 +73,11 @@ HEADERS += boardGUI.h \
 SOURCES += main.cpp \
            boardGUI.cpp \
            chessthread.cpp \
-           chooseColour.cpp \
+           colourDialog.cpp \
            infoGUI.cpp \
            initGUI.cpp \
            playerGUI.cpp \
-           promotion.cpp
+           promotionDialog.cpp
 
 win32 {
     LIBS += $${CORE_DIR}/obj/win32/action.o \

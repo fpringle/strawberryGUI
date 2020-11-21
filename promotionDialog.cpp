@@ -1,5 +1,5 @@
 #include "boardGUI.h"
-#include "promotion.h"
+#include "promotionDialog.h"
 
 #include <QDialog>
 #include <QWidget>

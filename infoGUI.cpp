@@ -13,13 +13,11 @@ namespace chessGUI {
 InfoPane::InfoPane(QWidget *parent) : QWidget(parent) {
 
 //    setFixedSize(200,400);
-    grid = new QGridLayout(this);
+    QGridLayout* grid = new QGridLayout(this);
 
     moveHistory = new QTextEdit(this);
     moveHistory->setReadOnly(true);
     moveHistory->setAlignment(Qt::AlignTop);
-//    moveHistory->setText("1. e2e4    e7e5\n2. g1f3");
-//    moveHistory->setStyleSheet("border: 1px solid black");
 
     QScrollArea *historyScroll = new QScrollArea(this);
     historyScroll->setFixedSize(170, 324);
@@ -28,7 +26,7 @@ InfoPane::InfoPane(QWidget *parent) : QWidget(parent) {
     grid->addWidget(historyScroll, 0, 0);
     moveHistory->setFixedSize(162, 316);
 
-    castlingRightsLayout = new QGridLayout;
+    QGridLayout* castlingRightsLayout = new QGridLayout;
     grid->addLayout(castlingRightsLayout, 1, 0);
     castlingRightsLayout->setSpacing(0);
 

@@ -25,7 +25,7 @@ QIcon pieceIcons[13] = {
 };
 
 
-ChessSquare::ChessSquare(int idx, QWidget *parent)
+ChessSquare::ChessSquare(int idx, ChessBoard *parent)
     : QPushButton(parent) {
     index = idx;
     if (((idx / 8) % 2) ^ ((idx % 8) % 2)) {
@@ -108,9 +108,9 @@ void ChessBoard::buttonPressed(int idx) {
     updateButtonStates();
 }
 
-void ChessBoard::loadBoard(bitboard* bb) {
-    bitboard all_pieces = 0ULL;
-    bitboard tmp;
+void ChessBoard::loadBoard(chessCore::bitboard* bb) {
+    chessCore::bitboard all_pieces = 0ULL;
+    chessCore::bitboard tmp;
     int i,j;
     int rank, file;
     for (i=0; i<12; i++) {

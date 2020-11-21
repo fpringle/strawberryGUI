@@ -5,8 +5,10 @@
 
 namespace chessGUI {
 
+/** Initialise global GUI constants. */
 void initGUI();
 
+/** Initialise global core and GUI constants. */
 void init_all();
 
 

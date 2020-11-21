@@ -8,8 +8,8 @@
 #include <QCoreApplication>
 
 #include "chessthread.h"
-#include "promotion.h"
-#include "chooseColour.h"
+#include "promotionDialog.h"
+#include "colourDialog.h"
 #include "board.h"
 
 
@@ -36,21 +36,6 @@ PlayerGUI::PlayerGUI(chessCore::colour side, QWidget *parent) : QWidget(parent) 
     updateBoard();
 }
 
-PlayerGUI::PlayerGUI(chessCore::colour downside,
-        chessCore::bitboard * startPositions, bool * castling,
-        bool ep, int dpp, uint8_t clock, uint8_t full_clock, chessCore::colour side,
-        chessCore::value_t open_val, chessCore::value_t end_val,
-        uint64_t hash, QWidget *parent) : QWidget(parent)  {
-
-    downSide = downside;
-    player = new chessCore::Player(startPositions, castling, ep, dpp,
-                                   clock, full_clock, side, open_val,
-                                   end_val, hash);
-    qRegisterMetaType<chessCore::move_t>();
-    initGraphics();
-    updateBoard();
-}
-
 PlayerGUI::PlayerGUI(chessCore::colour side, std::string fen, QWidget *parent)
         : QWidget(parent) {
     downSide = side;
@@ -62,7 +47,7 @@ PlayerGUI::PlayerGUI(chessCore::colour side, std::string fen, QWidget *parent)
 
 
 void PlayerGUI::initGraphics() {
-    mainGrid = new QGridLayout(this);
+    QGridLayout* mainGrid = new QGridLayout(this);
     board = new ChessBoard(downSide, this);
     info = new InfoPane(this);
     mainGrid->addWidget(board, 0, 0);

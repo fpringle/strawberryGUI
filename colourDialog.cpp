@@ -1,5 +1,5 @@
 #include "boardGUI.h"
-#include "chooseColour.h"
+#include "colourDialog.h"
 
 #include <QDialog>
 #include <QWidget>
