@@ -40,7 +40,7 @@ DISTNAME      = strawberryGUI1.0.0
 DISTDIR = /home/freddy/Documents/cpl/strawberry/src/gui/obj/strawberryGUI1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-O1
-LIBS          = $(SUBLIBS) /usr/lib/x86_64-linux-gnu/libQt5Widgets.so /usr/lib/x86_64-linux-gnu/libQt5Gui.so /usr/lib/x86_64-linux-gnu/libQt5Core.so /usr/lib/x86_64-linux-gnu/libGL.so -lpthread   
+LIBS          = $(SUBLIBS) ../core/obj/action.o ../core/obj/board.o ../core/obj/check.o ../core/obj/eval.o ../core/obj/hash.o ../core/obj/init.o ../core/obj/move.o ../core/obj/play.o ../core/obj/search.o ../core/obj/twiddle.o /usr/lib/x86_64-linux-gnu/libQt5Widgets.so /usr/lib/x86_64-linux-gnu/libQt5Gui.so /usr/lib/x86_64-linux-gnu/libQt5Core.so /usr/lib/x86_64-linux-gnu/libGL.so -lpthread   
 AR            = ar cqs
 RANLIB        = 
 SED           = sed
@@ -59,17 +59,7 @@ SOURCES       = main.cpp \
 		infoGUI.cpp \
 		initGUI.cpp \
 		playerGUI.cpp \
-		promotion.cpp \
-		../core/action.cpp \
-		../core/board.cpp \
-		../core/check.cpp \
-		../core/eval.cpp \
-		../core/hash.cpp \
-		../core/init.cpp \
-		../core/move.cpp \
-		../core/play.cpp \
-		../core/search.cpp \
-		../core/twiddle.cpp qrc_icons.cpp \
+		promotion.cpp qrc_icons.cpp \
 		obj/moc_chessthread.cpp
 OBJECTS       = obj/main.o \
 		obj/boardGUI.o \
@@ -79,16 +69,6 @@ OBJECTS       = obj/main.o \
 		obj/initGUI.o \
 		obj/playerGUI.o \
 		obj/promotion.o \
-		obj/action.o \
-		obj/board.o \
-		obj/check.o \
-		obj/eval.o \
-		obj/hash.o \
-		obj/init.o \
-		obj/move.o \
-		obj/play.o \
-		obj/search.o \
-		obj/twiddle.o \
 		obj/qrc_icons.o \
 		obj/moc_chessthread.o
 DIST          = ../../.qmake.conf \
@@ -120,17 +100,7 @@ DIST          = ../../.qmake.conf \
 		infoGUI.cpp \
 		initGUI.cpp \
 		playerGUI.cpp \
-		promotion.cpp \
-		../core/action.cpp \
-		../core/board.cpp \
-		../core/check.cpp \
-		../core/eval.cpp \
-		../core/hash.cpp \
-		../core/init.cpp \
-		../core/move.cpp \
-		../core/play.cpp \
-		../core/search.cpp \
-		../core/twiddle.cpp
+		promotion.cpp
 QMAKE_TARGET  = strawberryGUI
 DESTDIR       = build/
 TARGET        = build/strawberryGUI
@@ -139,7 +109,7 @@ TARGET        = build/strawberryGUI
 first: all
 ####### Build rules
 
-build/strawberryGUI:  $(OBJECTS)  
+build/strawberryGUI: ../core/obj/action.o ../core/obj/board.o ../core/obj/check.o ../core/obj/eval.o ../core/obj/hash.o ../core/obj/init.o ../core/obj/move.o ../core/obj/play.o ../core/obj/search.o ../core/obj/twiddle.o $(OBJECTS)  
 	@test -d build/ || mkdir -p build/
 	$(LINK) $(LFLAGS) -o $(TARGET) $(OBJECTS) $(OBJCOMP) $(LIBS)
 
@@ -319,7 +289,7 @@ distdir: FORCE
 	$(COPY_FILE) --parents icons.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents boardGUI.h chessthread.h chooseColour.h infoGUI.h initGUI.h playerGUI.h promotion.h ../core/action.h ../core/board.h ../core/eval.h ../core/hash.h ../core/init.h ../core/move.h ../core/play.h ../core/search.h ../core/tree.h ../core/twiddle.h ../core/typedefs.h boardGUI.h infoGUI.h playerGUI.h $(DISTDIR)/
-	$(COPY_FILE) --parents main.cpp boardGUI.cpp chessthread.cpp chooseColour.cpp infoGUI.cpp initGUI.cpp playerGUI.cpp promotion.cpp ../core/action.cpp ../core/board.cpp ../core/check.cpp ../core/eval.cpp ../core/hash.cpp ../core/init.cpp ../core/move.cpp ../core/play.cpp ../core/search.cpp ../core/twiddle.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents main.cpp boardGUI.cpp chessthread.cpp chooseColour.cpp infoGUI.cpp initGUI.cpp playerGUI.cpp promotion.cpp $(DISTDIR)/
 
 
 clean: compiler_clean 
@@ -333,6 +303,36 @@ distclean: clean
 
 
 ####### Sub-libraries
+
+../core/obj/action.o:
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../core/obj/action.o ../core/action.cpp
+
+../core/obj/board.o:
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../core/obj/board.o ../core/board.cpp
+
+../core/obj/check.o:
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../core/obj/check.o ../core/check.cpp
+
+../core/obj/eval.o:
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../core/obj/eval.o ../core/eval.cpp
+
+../core/obj/hash.o:
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../core/obj/hash.o ../core/hash.cpp
+
+../core/obj/init.o:
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../core/obj/init.o ../core/init.cpp
+
+../core/obj/move.o:
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../core/obj/move.o ../core/move.cpp
+
+../core/obj/play.o:
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../core/obj/play.o ../core/play.cpp
+
+../core/obj/search.o:
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../core/obj/search.o ../core/search.cpp
+
+../core/obj/twiddle.o:
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o ../core/obj/twiddle.o ../core/twiddle.cpp
 
 mocclean: compiler_moc_header_clean compiler_moc_objc_header_clean compiler_moc_source_clean
 
@@ -467,81 +467,6 @@ obj/promotion.o: promotion.cpp boardGUI.h \
 		../core/typedefs.h \
 		promotion.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/promotion.o promotion.cpp
-
-obj/action.o: ../core/action.cpp ../core/action.h \
-		../core/board.h \
-		../core/move.h \
-		../core/typedefs.h \
-		../core/eval.h \
-		../core/hash.h \
-		../core/play.h \
-		../core/tree.h \
-		../core/twiddle.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/action.o ../core/action.cpp
-
-obj/board.o: ../core/board.cpp ../core/board.h \
-		../core/move.h \
-		../core/typedefs.h \
-		../core/twiddle.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/board.o ../core/board.cpp
-
-obj/check.o: ../core/check.cpp ../core/board.h \
-		../core/move.h \
-		../core/typedefs.h \
-		../core/twiddle.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/check.o ../core/check.cpp
-
-obj/eval.o: ../core/eval.cpp ../core/eval.h \
-		../core/typedefs.h \
-		../core/board.h \
-		../core/move.h \
-		../core/twiddle.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/eval.o ../core/eval.cpp
-
-obj/hash.o: ../core/hash.cpp ../core/hash.h \
-		../core/board.h \
-		../core/move.h \
-		../core/typedefs.h \
-		../core/twiddle.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/hash.o ../core/hash.cpp
-
-obj/init.o: ../core/init.cpp ../core/init.h \
-		../core/board.h \
-		../core/move.h \
-		../core/typedefs.h \
-		../core/hash.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/init.o ../core/init.cpp
-
-obj/move.o: ../core/move.cpp ../core/move.h \
-		../core/typedefs.h \
-		../core/action.h \
-		../core/board.h \
-		../core/twiddle.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/move.o ../core/move.cpp
-
-obj/play.o: ../core/play.cpp ../core/play.h \
-		../core/board.h \
-		../core/move.h \
-		../core/typedefs.h \
-		../core/tree.h \
-		../core/action.h \
-		../core/init.h \
-		../core/search.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/play.o ../core/play.cpp
-
-obj/search.o: ../core/search.cpp ../core/search.h \
-		../core/board.h \
-		../core/move.h \
-		../core/typedefs.h \
-		../core/action.h \
-		../core/play.h \
-		../core/tree.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/search.o ../core/search.cpp
-
-obj/twiddle.o: ../core/twiddle.cpp ../core/twiddle.h \
-		../core/typedefs.h \
-		../core/move.h
-	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/twiddle.o ../core/twiddle.cpp
 
 obj/qrc_icons.o: qrc_icons.cpp 
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/qrc_icons.o qrc_icons.cpp

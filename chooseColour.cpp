@@ -37,6 +37,8 @@ ColourDialog::ColourDialog(QWidget *parent)
 
     setLayout(grid);
     setModal(true);
+
+    setWindowIcon(pieceIcons[0]);
 }
 
 void ColourDialog::chooseWhite() {

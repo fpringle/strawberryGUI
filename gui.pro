@@ -4,9 +4,11 @@
 
 TEMPLATE = app
 TARGET = build/strawberryGUI
-INCLUDEPATH += $$_PRO_FILE_PWD_/../core
 OBJECTS_DIR = obj
 MOC_DIR = obj
+CORE_DIR = $${_PRO_FILE_PWD}../core
+INCLUDEPATH += $${CORE_DIR}
+
 
 # The following define makes your compiler warn you if you use any
 # feature of Qt which has been marked as deprecated (the exact warnings
@@ -48,18 +50,90 @@ SOURCES += main.cpp \
            infoGUI.cpp \
            initGUI.cpp \
            playerGUI.cpp \
-           promotion.cpp \
-           ../core/action.cpp \
-           ../core/board.cpp \
-           ../core/check.cpp \
-           ../core/eval.cpp \
-           ../core/hash.cpp \
-           ../core/init.cpp \
-           ../core/move.cpp \
-           ../core/play.cpp \
-           ../core/search.cpp \
-           ../core/twiddle.cpp
+           promotion.cpp
+#           promotion.cpp \
+#           ../core/action.cpp \
+#           ../core/board.cpp \
+#           ../core/check.cpp \
+#           ../core/eval.cpp \
+#           ../core/hash.cpp \
+#           ../core/init.cpp \
+#           ../core/move.cpp \
+#           ../core/play.cpp \
+#           ../core/search.cpp \
+#           ../core/twiddle.cpp
+
+LIBS += $${CORE_DIR}/obj/action.o \
+        $${CORE_DIR}/obj/board.o \
+        $${CORE_DIR}/obj/check.o \
+        $${CORE_DIR}/obj/eval.o \
+        $${CORE_DIR}/obj/hash.o \
+        $${CORE_DIR}/obj/init.o \
+        $${CORE_DIR}/obj/move.o \
+        $${CORE_DIR}/obj/play.o \
+        $${CORE_DIR}/obj/search.o \
+        $${CORE_DIR}/obj/twiddle.o
+
 
 QT += widgets
 
 RESOURCES = icons.qrc
+
+ICON = icons/icon.ico
+
+PRE_TARGETDEPS +=   \
+                    $${CORE_DIR}/obj/action.o \
+                    $${CORE_DIR}/obj/board.o \
+                    $${CORE_DIR}/obj/check.o \
+                    $${CORE_DIR}/obj/eval.o \
+                    $${CORE_DIR}/obj/hash.o \
+                    $${CORE_DIR}/obj/init.o \
+                    $${CORE_DIR}/obj/move.o \
+                    $${CORE_DIR}/obj/play.o \
+                    $${CORE_DIR}/obj/search.o \
+                    $${CORE_DIR}/obj/twiddle.o
+
+
+
+actiontarget.target = $${CORE_DIR}/obj/action.o
+actiontarget.commands = $(CXX) -c $(CXXFLAGS) $(INCPATH) -o $${CORE_DIR}/obj/action.o $${CORE_DIR}/action.cpp
+
+boardtarget.target = $${CORE_DIR}/obj/board.o
+boardtarget.commands = $(CXX) -c $(CXXFLAGS) $(INCPATH) -o $${CORE_DIR}/obj/board.o $${CORE_DIR}/board.cpp
+
+checktarget.target = $${CORE_DIR}/obj/check.o
+checktarget.commands = $(CXX) -c $(CXXFLAGS) $(INCPATH) -o $${CORE_DIR}/obj/check.o $${CORE_DIR}/check.cpp
+
+evaltarget.target = $${CORE_DIR}/obj/eval.o
+evaltarget.commands = $(CXX) -c $(CXXFLAGS) $(INCPATH) -o $${CORE_DIR}/obj/eval.o $${CORE_DIR}/eval.cpp
+
+hashtarget.target = $${CORE_DIR}/obj/hash.o
+hashtarget.commands = $(CXX) -c $(CXXFLAGS) $(INCPATH) -o $${CORE_DIR}/obj/hash.o $${CORE_DIR}/hash.cpp
+
+inittarget.target = $${CORE_DIR}/obj/init.o
+inittarget.commands = $(CXX) -c $(CXXFLAGS) $(INCPATH) -o $${CORE_DIR}/obj/init.o $${CORE_DIR}/init.cpp
+
+movetarget.target = $${CORE_DIR}/obj/move.o
+movetarget.commands = $(CXX) -c $(CXXFLAGS) $(INCPATH) -o $${CORE_DIR}/obj/move.o $${CORE_DIR}/move.cpp
+
+playtarget.target = $${CORE_DIR}/obj/play.o
+playtarget.commands = $(CXX) -c $(CXXFLAGS) $(INCPATH) -o $${CORE_DIR}/obj/play.o $${CORE_DIR}/play.cpp
+
+searchtarget.target = $${CORE_DIR}/obj/search.o
+searchtarget.commands = $(CXX) -c $(CXXFLAGS) $(INCPATH) -o $${CORE_DIR}/obj/search.o $${CORE_DIR}/search.cpp
+
+twiddletarget.target = $${CORE_DIR}/obj/twiddle.o
+twiddletarget.commands = $(CXX) -c $(CXXFLAGS) $(INCPATH) -o $${CORE_DIR}/obj/twiddle.o $${CORE_DIR}/twiddle.cpp
+
+QMAKE_EXTRA_TARGETS += \
+                        actiontarget \
+                        boardtarget \
+                        checktarget \
+                        evaltarget \
+                        hashtarget \
+                        inittarget \
+                        movetarget \
+                        playtarget \
+                        searchtarget \
+                        twiddletarget
+
