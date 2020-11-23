@@ -21,7 +21,7 @@ PlayerGUI::PlayerGUI(QWidget* parent) : QWidget(parent) {
     ColourDialog* choose = new ColourDialog(this);
 //    qRegisterMetaType<chessCore::colour>();
     downSide = choose->choose();
-    player = new chessCore::Player();
+    player = new chessCore::Player(downSide);
     player->read_config("config.toml");
     qRegisterMetaType<chessCore::move_t>();
     initGraphics();
@@ -30,7 +30,7 @@ PlayerGUI::PlayerGUI(QWidget* parent) : QWidget(parent) {
 
 PlayerGUI::PlayerGUI(chessCore::colour side, QWidget *parent) : QWidget(parent) {
     downSide = side;
-    player = new chessCore::Player();
+    player = new chessCore::Player(downSide);
     qRegisterMetaType<chessCore::move_t>();
     initGraphics();
     updateBoard();
@@ -109,17 +109,21 @@ bool PlayerGUI::doMove(chessCore::move_t move) {
     player->doMoveInPlace(move);
     updateBoard();
     if (player->gameover()) {
-        switch (player->is_checkmate()) {
-            case 1:
-                info->setMiscText("Black wins!");
-                break;
-            case -1:
+
+        if (player->is_checkmate()) {
+            chessCore::colour side;
+            player->getSide(&side);
+            if (side == chessCore::black) {
                 info->setMiscText("White wins!");
-                break;
-            case 0:
-                info->setMiscText("Draw!");
-                break;
+            }
+            else {
+                info->setMiscText("Black wins!");
+            }
         }
+        else {
+            info->setMiscText("Draw!");
+        }
+
         board->setActive(false);
         return false;
     }
