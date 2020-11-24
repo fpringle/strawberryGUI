@@ -37,6 +37,7 @@ private:
 
     /** The colour the user is playing as. */
     chessCore::colour downSide;
+
 public:
     /**
      *  \brief Default constructor for PlayerGUI. Graphically prompt the user
@@ -66,6 +67,9 @@ public:
      *  \param parent               A reference to the parent QWidget object.
      */
     PlayerGUI(chessCore::colour side, std::string fen, QWidget *parent=0);
+
+    /** Cleanup code */
+    void onClose();
 
     /** Initialise the GUI. */
     void initGraphics();

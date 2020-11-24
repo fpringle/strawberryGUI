@@ -1,5 +1,8 @@
 #include "playerGUI.h"
 
+#include <time.h>
+
+#include <fstream>
 #include <vector>
 #include <sstream>
 
@@ -45,6 +48,31 @@ PlayerGUI::PlayerGUI(chessCore::colour side, std::string fen, QWidget *parent)
     updateBoard();
 }
 
+void PlayerGUI::onClose() {
+    time_t t = time(0);
+    struct tm * now = localtime(&t);
+    std::string logfilename(80, '\0');
+    strftime(&logfilename[0], logfilename.size(), "%Y%m%d_%H%M%S.log", now);
+    std::ofstream logfile;
+    logfile.open(logfilename, std::ios::out | std::ios::trunc);
+
+    if (downSide == chessCore::white) {
+        logfile << "User colour: white\n"
+                << "Computer colour: black\n";
+    }
+    else {
+        logfile << "User colour: black\n"
+                << "Computer colour: white\n";
+    }
+    logfile << "Computer search timeout: " << player->getTimeout()
+            << " seconds\n";
+
+
+    logfile << "\nMove history:\n";
+    player->print_history(logfile);
+
+    logfile.close();
+}
 
 void PlayerGUI::initGraphics() {
     QGridLayout* mainGrid = new QGridLayout(this);

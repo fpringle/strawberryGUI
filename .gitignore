@@ -13,6 +13,7 @@
 *.zip
 *.o
 *.o.d
+*.log
 
 .qmake*
 qrc_icons.cpp
