@@ -7,7 +7,7 @@ namespace chessGUI {
 
 void WorkerThread::run() {
     chessCore::move_t move = player->iterative_deepening();
-    emit resultReady(move);
+    emit resultReady((quint16)move);
 }
 
 WorkerThread::WorkerThread(chessCore::Player *plyr, QObject *parent)

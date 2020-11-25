@@ -22,11 +22,9 @@ namespace chessGUI {
 
 PlayerGUI::PlayerGUI(QWidget* parent) : QWidget(parent) {
     ColourDialog* choose = new ColourDialog(this);
-//    qRegisterMetaType<chessCore::colour>();
     downSide = choose->choose();
     player = new chessCore::Player(downSide);
     player->read_config("config.toml");
-    qRegisterMetaType<chessCore::move_t>();
     initGraphics();
     updateBoard();
 }
@@ -34,7 +32,6 @@ PlayerGUI::PlayerGUI(QWidget* parent) : QWidget(parent) {
 PlayerGUI::PlayerGUI(chessCore::colour side, QWidget *parent) : QWidget(parent) {
     downSide = side;
     player = new chessCore::Player(downSide);
-    qRegisterMetaType<chessCore::move_t>();
     initGraphics();
     updateBoard();
 }
@@ -43,7 +40,6 @@ PlayerGUI::PlayerGUI(chessCore::colour side, std::string fen, QWidget *parent)
         : QWidget(parent) {
     downSide = side;
     player = new chessCore::Player(fen);
-    qRegisterMetaType<chessCore::move_t>();
     initGraphics();
     updateBoard();
 }
@@ -99,11 +95,9 @@ void PlayerGUI::updateBoard() {
     player->getSide(&side);
     if (side == chessCore::white) {
         info->setMiscText("White to move");
-//        board->setActive(true);
     }
     else {
         info->setMiscText("Black to move");
-//        board->setActive(false);
     }
     board->setActive(side == downSide);
 }
@@ -113,11 +107,11 @@ void PlayerGUI::interpretMove(int fromIndex, int toIndex) {
     int num_moves = player->gen_legal_moves(moves);
     chessCore::move_t move;
     for (int i=0; i<num_moves; i++) {
-        if (moves[i].from_sq() == fromIndex &&
-                moves[i].to_sq() == toIndex) {
+        if (chessCore::from_sq(moves[i]) == fromIndex &&
+                chessCore::to_sq(moves[i]) == toIndex) {
 
-            if (moves[i].is_promotion()) {
-                move = whichPromotion(moves[i]);
+            if (chessCore::is_promotion(moves[i])) {
+                move = chessCore::which_promotion(moves[i]);
             }
             else {
                 move = moves[i];
@@ -179,7 +173,7 @@ void PlayerGUI::compMove() {
 chessCore::move_t PlayerGUI::whichPromotion(chessCore::move_t prom) {
     PromotionDialog *dlg = new PromotionDialog(downSide, this);
     chessCore::piece pc = dlg->choose();
-    prom.set_promotion(pc);
+    prom = set_promotion(prom, pc);
     return prom;
 }
 

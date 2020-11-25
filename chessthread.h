@@ -31,7 +31,7 @@ signals:
      *
      *  \param move             The computer move.
      */
-    void resultReady(chessCore::move_t move);
+    void resultReady(quint16 move);
 
 private:
     /** A reference to the underlying \ref chessCore::Player object. */
