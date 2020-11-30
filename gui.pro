@@ -31,10 +31,10 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 win32 {
     QMAKE_CXXFLAGS += -std=gnu++11
-    QMAKE_LFLAGS += -DUSE_CONFIG_FILE=0
+#    QMAKE_LFLAGS += -DUSE_CONFIG_FILE=0
 }
 else:unix {
-    QMAKE_LFLAGS += -DUSE_CONFIG_FILE=1
+#    QMAKE_LFLAGS += -DUSE_CONFIG_FILE=1
 }
 
 # You can also make your code fail to compile if you use deprecated APIs.
