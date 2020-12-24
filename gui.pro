@@ -88,8 +88,7 @@ win32 {
             $${CORE_DIR}/obj/win32/init.o \
             $${CORE_DIR}/obj/win32/move.o \
             $${CORE_DIR}/obj/win32/play.o \
-            $${CORE_DIR}/obj/win32/search.o \
-            $${CORE_DIR}/obj/win32/twiddle.o
+            $${CORE_DIR}/obj/win32/search.o
 
 
     PRE_TARGETDEPS +=   \
@@ -101,8 +100,7 @@ win32 {
                         $${CORE_DIR}/obj/win32/init.o \
                         $${CORE_DIR}/obj/win32/move.o \
                         $${CORE_DIR}/obj/win32/play.o \
-                        $${CORE_DIR}/obj/win32/search.o \
-                        $${CORE_DIR}/obj/win32/twiddle.o
+                        $${CORE_DIR}/obj/win32/search.o
 
 
     make_core_win32_object_dir.target = make_core_win32_object_dir
@@ -144,10 +142,6 @@ win32 {
     searchtarget.commands = $(CXX) -c $(CXXFLAGS) $(INCPATH) -o $${CORE_DIR}/obj/win32/search.o $${CORE_DIR}/search.cpp
     searchtarget.depends = make_core_win32_object_dir
 
-    twiddletarget.target = $${CORE_DIR}/obj/win32/twiddle.o
-    twiddletarget.commands = $(CXX) -c $(CXXFLAGS) $(INCPATH) -o $${CORE_DIR}/obj/win32/twiddle.o $${CORE_DIR}/twiddle.cpp
-    twiddletarget.depends = make_core_win32_object_dir
-
     QMAKE_EXTRA_TARGETS += \
                             actiontarget \
                             boardtarget \
@@ -158,7 +152,6 @@ win32 {
                             movetarget \
                             playtarget \
                             searchtarget \
-                            twiddletarget \
                             make_core_win32_object_dir
 
 } else:unix {
@@ -170,8 +163,7 @@ win32 {
             $${CORE_DIR}/obj/init.o \
             $${CORE_DIR}/obj/move.o \
             $${CORE_DIR}/obj/play.o \
-            $${CORE_DIR}/obj/search.o \
-            $${CORE_DIR}/obj/twiddle.o
+            $${CORE_DIR}/obj/search.o
 
 
     PRE_TARGETDEPS +=   \
@@ -183,8 +175,7 @@ win32 {
                         $${CORE_DIR}/obj/init.o \
                         $${CORE_DIR}/obj/move.o \
                         $${CORE_DIR}/obj/play.o \
-                        $${CORE_DIR}/obj/search.o \
-                        $${CORE_DIR}/obj/twiddle.o
+                        $${CORE_DIR}/obj/search.o
 
 
 
@@ -215,9 +206,6 @@ win32 {
     searchtarget.target = $${CORE_DIR}/obj/search.o
     searchtarget.commands = $(CXX) -c $(CXXFLAGS) $(INCPATH) -o $${CORE_DIR}/obj/search.o $${CORE_DIR}/search.cpp
 
-    twiddletarget.target = $${CORE_DIR}/obj/twiddle.o
-    twiddletarget.commands = $(CXX) -c $(CXXFLAGS) $(INCPATH) -o $${CORE_DIR}/obj/twiddle.o $${CORE_DIR}/twiddle.cpp
-
     QMAKE_EXTRA_TARGETS += \
                             actiontarget \
                             boardtarget \
@@ -227,8 +215,7 @@ win32 {
                             inittarget \
                             movetarget \
                             playtarget \
-                            searchtarget \
-                            twiddletarget
+                            searchtarget
 }
 
 

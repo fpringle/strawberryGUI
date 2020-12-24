@@ -103,21 +103,20 @@ void PlayerGUI::updateBoard() {
 }
 
 void PlayerGUI::interpretMove(int fromIndex, int toIndex) {
-    chessCore::move_t moves[256];
-    int num_moves = player->gen_legal_moves(moves);
-    chessCore::move_t move;
-    for (int i=0; i<num_moves; i++) {
-        if (chessCore::from_sq(moves[i]) == fromIndex &&
-                chessCore::to_sq(moves[i]) == toIndex) {
+    chessCore::MoveList moves = player->gen_legal_moves();
+    chessCore::move_t comp_move;
+    for (chessCore::move_t move : moves) {
+        if (chessCore::from_sq(move) == fromIndex &&
+                chessCore::to_sq(move) == toIndex) {
 
-            if (chessCore::is_promotion(moves[i])) {
-                move = chessCore::which_promotion(moves[i]);
+            if (chessCore::is_promotion(move)) {
+                comp_move = chessCore::which_promotion(move);
             }
             else {
-                move = moves[i];
+                comp_move = move;
             }
 
-            if (doMove(move) ) {
+            if (doMove(comp_move) ) {
                 compMove();
             }
             return;
