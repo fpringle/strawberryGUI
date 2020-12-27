@@ -1,3 +1,4 @@
+/* Copyright 2020 Freddy Pringle */
 #include "initGUI.h"
 
 #include <QApplication>
@@ -32,4 +33,4 @@ void init_all() {
 }
 
 
-} // end of chessGUI namespace
+}   // namespace chessGUI

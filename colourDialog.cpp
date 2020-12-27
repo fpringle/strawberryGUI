@@ -1,4 +1,6 @@
+/* Copyright 2020 Freddy Pringle */
 #include "boardGUI.h"
+
 #include "colourDialog.h"
 
 #include <QDialog>
@@ -10,7 +12,6 @@ namespace chessGUI {
 
 ColourDialog::ColourDialog(QWidget *parent)
         : QDialog(parent) {
-
     setWindowTitle("Choose a colour");
     resize(200, 100);
 
@@ -19,11 +20,11 @@ ColourDialog::ColourDialog(QWidget *parent)
     QGridLayout * grid = new QGridLayout(this);
 
     int i;
-    for (i=0; i<2; i++) {
+    for (i=0; i < 2; i++) {
         buttons[i] = new QPushButton(this);
         buttons[i]->setIcon(pieceIcons[i * 6]);
-        buttons[i]->setFixedSize(100,100);
-        buttons[i]->setIconSize(QSize(100,100));
+        buttons[i]->setFixedSize(100, 100);
+        buttons[i]->setIconSize(QSize(100, 100));
         QString buttonColour = (i ? "ivory" : "grey");
         buttons[i]->setStyleSheet("QPushButton { background-color: "
                                   + buttonColour + " }");
@@ -57,4 +58,4 @@ chessCore::colour ColourDialog::choose() {
 }
 
 
-} // end of chessGUI namespace
+}   // namespace chessGUI

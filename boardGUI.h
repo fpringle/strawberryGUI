@@ -1,15 +1,14 @@
-#ifndef __BOARD_GUI_H
-#define __BOARD_GUI_H
-
-#include "board.h"
+/* Copyright 2020 Freddy Pringle */
+#ifndef SRC_GUI_BOARDGUI_H_
+#define SRC_GUI_BOARDGUI_H_
 
 #include <QWidget>
 #include <QPushButton>
 #include <QIcon>
-
 #include <iostream>
 #include <cstdint>
 
+#include "board.h"
 
 
 /**
@@ -35,17 +34,17 @@ class ChessBoard;
  *  \brief A push-button representing a single square on the board.
  */
 class ChessSquare : public QPushButton {
-private:
+ private:
     /** The index of the chess square. */
     int index;
-public:
+ public:
     /**
      *  \brief Default constrcutor for ChessSquare.
      *
      *  \param idx          The index of the square. See \ref index.
      *  \param parent       A reference to the parent ChessBoard.
      */
-    ChessSquare(int idx, ChessBoard *parent=0);
+    explicit ChessSquare(int idx, ChessBoard *parent = 0);
 
     /**
      *  The callback function when the button is pressed. It calls the
@@ -60,7 +59,7 @@ public:
  *  \brief A graphical representation of the chess board.
  */
 class ChessBoard : public QWidget {
-private:
+ private:
     /**
      *  Indicates whether the board is ready for user input.
      *  True when it's the user's turn, false when the computer
@@ -90,7 +89,7 @@ private:
      */
     chessCore::colour downSide;
 
-public:
+ public:
     /**
      *  \brief Default constructor for ChessBoard.
      *
@@ -98,7 +97,7 @@ public:
      *                      See \ref downSide.
      *  \param parent       A reference to the parent QWidget object.
      */
-    ChessBoard(chessCore::colour side, QWidget *parent=0);
+    explicit ChessBoard(chessCore::colour side, QWidget *parent = 0);
 
     /**
      *  Load the positions of the pieces from an array of bitboards.
@@ -130,6 +129,6 @@ public:
 };
 
 
-} // end of chessGUI namespace
+}   // namespace chessGUI
 
-#endif
+#endif  // SRC_GUI_BOARDGUI_H_

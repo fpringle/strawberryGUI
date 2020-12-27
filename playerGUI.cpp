@@ -1,14 +1,15 @@
+/* Copyright 2020 Freddy Pringle */
 #include "playerGUI.h"
 
 #include <time.h>
+#include <QGridLayout>
+#include <QThread>
+#include <QCoreApplication>
 
 #include <fstream>
 #include <vector>
 #include <sstream>
 
-#include <QGridLayout>
-#include <QThread>
-#include <QCoreApplication>
 
 #include "chessthread.h"
 #include "promotionDialog.h"
@@ -29,7 +30,8 @@ PlayerGUI::PlayerGUI(QWidget* parent) : QWidget(parent) {
     updateBoard();
 }
 
-PlayerGUI::PlayerGUI(chessCore::colour side, QWidget *parent) : QWidget(parent) {
+PlayerGUI::PlayerGUI(chessCore::colour side, QWidget *parent)
+        : QWidget(parent) {
     downSide = side;
     player = new chessCore::Player(downSide);
     initGraphics();
@@ -46,17 +48,17 @@ PlayerGUI::PlayerGUI(chessCore::colour side, std::string fen, QWidget *parent)
 
 void PlayerGUI::onClose() {
     time_t t = time(0);
-    struct tm * now = localtime(&t);
+    struct tm* now = new tm;
+    localtime_r(&t, now);
     std::string logfilename(80, '\0');
-    strftime(&logfilename[0], logfilename.size(), "%Y%m%d_%H%M%S.log", now);
+    strftime(&logfilename[0], logfilename.size(), "log/%Y%m%d_%H%M%S.log", now);
     std::ofstream logfile;
     logfile.open(logfilename, std::ios::out | std::ios::trunc);
 
     if (downSide == chessCore::white) {
         logfile << "User colour: white\n"
                 << "Computer colour: black\n";
-    }
-    else {
+    } else {
         logfile << "User colour: black\n"
                 << "Computer colour: white\n";
     }
@@ -65,7 +67,7 @@ void PlayerGUI::onClose() {
 
 
     logfile << "\nMove history:\n";
-    player->print_history(logfile);
+    player->print_history_san(logfile);
 
     logfile.close();
 }
@@ -95,8 +97,7 @@ void PlayerGUI::updateBoard() {
     player->getSide(&side);
     if (side == chessCore::white) {
         info->setMiscText("White to move");
-    }
-    else {
+    } else {
         info->setMiscText("Black to move");
     }
     board->setActive(side == downSide);
@@ -108,15 +109,13 @@ void PlayerGUI::interpretMove(int fromIndex, int toIndex) {
     for (chessCore::move_t move : moves) {
         if (chessCore::from_sq(move) == fromIndex &&
                 chessCore::to_sq(move) == toIndex) {
-
             if (chessCore::is_promotion(move)) {
                 comp_move = chessCore::which_promotion(move);
-            }
-            else {
+            } else {
                 comp_move = move;
             }
 
-            if (doMove(comp_move) ) {
+            if (doMove(comp_move)) {
                 compMove();
             }
             return;
@@ -130,18 +129,15 @@ bool PlayerGUI::doMove(chessCore::move_t move) {
     player->doMoveInPlace(move);
     updateBoard();
     if (player->gameover()) {
-
         if (player->is_checkmate()) {
             chessCore::colour side;
             player->getSide(&side);
             if (side == chessCore::black) {
                 info->setMiscText("White wins!");
-            }
-            else {
+            } else {
                 info->setMiscText("Black wins!");
             }
-        }
-        else {
+        } else {
             info->setMiscText("Draw!");
         }
 
@@ -182,4 +178,4 @@ void PlayerGUI::play() {
     if (downSide != side_to_move) compMove();
 }
 
-} // end of chessGUI namespace
+}   // namespace chessGUI

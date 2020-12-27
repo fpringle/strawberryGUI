@@ -1,5 +1,6 @@
-#ifndef __INFO_GUI_H
-#define __INFO_GUI_H
+/* Copyright 2020 Freddy Pringle */
+#ifndef SRC_GUI_INFOGUI_H_
+#define SRC_GUI_INFOGUI_H_
 
 #include <QWidget>
 #include <QLabel>
@@ -19,20 +20,21 @@ namespace chessGUI {
  *  the move history and the castling rights.
  */
 class InfoPane : public QWidget {
-private:
+ private:
     /** An array of labels indicating the castling rights. */
     QPushButton *castlingRightsLabels[4];
     /** A text box to display the move history. */
     QTextEdit *moveHistory;
     /** A text box to display general information. */
     QTextEdit *miscInfo;
-public:
+
+ public:
     /**
      *  \brief The default constructor for InfoPane.
      *
      *  \param parent           A reference to the parent QWidget object.
      */
-    InfoPane(QWidget *parent=0);
+    explicit InfoPane(QWidget *parent = 0);
 
     /**
      *  Update the \ref castlingRightsLabels.
@@ -59,7 +61,7 @@ public:
 
 
 
-} // end of chessGUI namespace
+}   // namespace chessGUI
 
 
-#endif
+#endif  // SRC_GUI_INFOGUI_H_

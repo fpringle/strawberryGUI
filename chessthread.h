@@ -1,9 +1,10 @@
-#ifndef __CHESS_THREAD_H
-#define __CHESS_THREAD_H
-
-#include "play.h"
+/* Copyright 2020 Freddy Pringle */
+#ifndef SRC_GUI_CHESSTHREAD_H_
+#define SRC_GUI_CHESSTHREAD_H_
 
 #include <QThread>
+
+#include "play.h"
 
 
 
@@ -25,7 +26,7 @@ class WorkerThread : public QThread {
     /** The main loop of the thread. */
     void run() override;
 
-signals:
+ signals:
     /**
      *  A signal indicating that the computer has chosen its move.
      *
@@ -33,11 +34,11 @@ signals:
      */
     void resultReady(quint16 move);
 
-private:
+ private:
     /** A reference to the underlying \ref chessCore::Player object. */
     chessCore::Player *player;
 
-public:
+ public:
     /**
      *  \brief Constructor for WorkerThread.
      *
@@ -45,13 +46,9 @@ public:
      *                          \ref chessCore::Player object.
      *  \param parent           A reference to the parent QObject object.
      */
-    WorkerThread(chessCore::Player *plyr, QObject *parent=0);
-
+    explicit WorkerThread(chessCore::Player *plyr, QObject *parent = 0);
 };
 
+}   // namespace chessGUI
 
-
-
-} // end of chessGUI namespace
-
-#endif
+#endif  // SRC_GUI_CHESSTHREAD_H_

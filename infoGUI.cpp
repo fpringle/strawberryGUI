@@ -1,18 +1,20 @@
+/* Copyright 2020 Freddy Pringle */
 #include "infoGUI.h"
-#include "boardGUI.h"
 
 #include <QLabel>
 #include <QScrollArea>
-#include <iostream>
 #include <QTextStream>
 #include <QTextEdit>
 
+#include <iostream>
+
+#include "boardGUI.h"
+
+
 namespace chessGUI {
 
-
 InfoPane::InfoPane(QWidget *parent) : QWidget(parent) {
-
-//    setFixedSize(200,400);
+//    setFixedSize(200, 400);
     QGridLayout* grid = new QGridLayout(this);
 
     moveHistory = new QTextEdit(this);
@@ -30,13 +32,11 @@ InfoPane::InfoPane(QWidget *parent) : QWidget(parent) {
     grid->addLayout(castlingRightsLayout, 1, 0);
     castlingRightsLayout->setSpacing(0);
 
-    for (int i=0; i<4; i++) {
+    for (int i=0; i < 4; i++) {
         castlingRightsLabels[i] = new QPushButton(this);
-        castlingRightsLabels[i]->setFixedSize(40,40);
-        castlingRightsLabels[i]->setIconSize(QSize(40,40));
+        castlingRightsLabels[i]->setFixedSize(40, 40);
+        castlingRightsLabels[i]->setIconSize(QSize(40, 40));
         castlingRightsLabels[i]->setDisabled(true);
-//        castlingRightsLabels[i]->setIcon(pieceIcons[(int(i / 2) * 6) + 4 + (i%2)]);
-//        castlingRightsLabels[i]->setStyleSheet("");
         castlingRightsLayout->addWidget(castlingRightsLabels[i], 0, i);
     }
 
@@ -54,35 +54,30 @@ void InfoPane::setCastlingRights(bool *rights) {
     // white king
     if (rights[0]) {
         castlingRightsLabels[0]->setIcon(pieceIcons[5]);
-    }
-    else {
+    } else {
         castlingRightsLabels[0]->setIcon(pieceIcons[12]);
     }
 
     // white queen
     if (rights[1]) {
         castlingRightsLabels[1]->setIcon(pieceIcons[4]);
-    }
-    else {
+    } else {
         castlingRightsLabels[1]->setIcon(pieceIcons[12]);
     }
 
     // black king
     if (rights[2]) {
         castlingRightsLabels[2]->setIcon(pieceIcons[11]);
-    }
-    else {
+    } else {
         castlingRightsLabels[2]->setIcon(pieceIcons[12]);
     }
 
     // black queen
     if (rights[3]) {
         castlingRightsLabels[3]->setIcon(pieceIcons[10]);
-    }
-    else {
+    } else {
         castlingRightsLabels[3]->setIcon(pieceIcons[12]);
     }
-
 }
 
 void InfoPane::updateHistory(std::string s) {
@@ -96,4 +91,4 @@ void InfoPane::setMiscText(std::string s) {
 }
 
 
-} // end of chessGUI namespace
+}   // namespace chessGUI

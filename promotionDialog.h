@@ -1,13 +1,14 @@
-#ifndef __PROMOTION_H
-#define __PROMOTION_H
+/* Copyright 2020 Freddy Pringle */
+#ifndef SRC_GUI_PROMOTIONDIALOG_H_
+#define SRC_GUI_PROMOTIONDIALOG_H_
 
-
-#include "board.h"
-#include "move.h"
 
 #include <QDialog>
 #include <QWidget>
 #include <QPushButton>
+
+#include "board.h"
+#include "move.h"
 
 
 namespace chessGUI {
@@ -19,20 +20,21 @@ namespace chessGUI {
  *         promotion piece selection.
  */
 class PromotionDialog : public QDialog {
-private:
+ private:
     /** An array of buttons corresponding to the piece options. */
     QPushButton * buttons[4];
 
     /** The piece chosen by the user. */
     chessCore::piece chosenPiece;
-public:
+
+ public:
     /**
      *  \brief The default constructor for PromotionDialog.
      *
      *  \param side             The colour that the user is playing as.
      *  \param parent           A reference to the parent QWidget object.
      */
-    PromotionDialog(chessCore::colour side, QWidget *parent=0);
+    explicit PromotionDialog(chessCore::colour side, QWidget *parent = 0);
 
     /** A callback function for when the user chooses knight. */
     void chooseKnight();
@@ -53,7 +55,7 @@ public:
 
 
 
-} // end of chessGUI namespace
+}   // namespace chessGUI
 
 
-#endif
+#endif  // SRC_GUI_PROMOTIONDIALOG_H_

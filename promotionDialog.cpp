@@ -1,4 +1,6 @@
+/* Copyright 2020 Freddy Pringle */
 #include "boardGUI.h"
+
 #include "promotionDialog.h"
 
 #include <QDialog>
@@ -16,17 +18,16 @@ PromotionDialog::PromotionDialog(chessCore::colour side, QWidget *parent)
     QGridLayout * grid = new QGridLayout(this);
 
     int i;
-    int icons[4] = {2,3,1,4};
-    for (i=0; i<4; i++) {
+    int icons[4] = {2, 3, 1, 4};
+    for (i=0; i < 4; i++) {
         buttons[i] = new QPushButton(this);
         if (side == chessCore::white) {
             buttons[i]->setIcon(pieceIcons[icons[i]]);
-        }
-        else {
+        } else {
             buttons[i]->setIcon(pieceIcons[icons[i] + 6]);
         }
-        buttons[i]->setFixedSize(50,50);
-        buttons[i]->setIconSize(QSize(50,50));
+        buttons[i]->setFixedSize(50, 50);
+        buttons[i]->setIconSize(QSize(50, 50));
         grid->addWidget(buttons[i], 0, i);
     }
 
@@ -69,4 +70,4 @@ chessCore::piece PromotionDialog::choose() {
 }
 
 
-} // end of chessGUI namespace
+}   // namespace chessGUI

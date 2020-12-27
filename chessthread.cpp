@@ -1,5 +1,5 @@
+/* Copyright 2020 Freddy Pringle */
 #include "chessthread.h"
-
 
 
 namespace chessGUI {
@@ -17,4 +17,4 @@ WorkerThread::WorkerThread(chessCore::Player *plyr, QObject *parent)
 
 
 
-} // end of chessGUI namespace
+}   // namespace chessGUI

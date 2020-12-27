@@ -164,7 +164,6 @@ DIST          = /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/spec_pre.prf \
 		../core/move.h \
 		../core/play.h \
 		../core/search.h \
-		../core/tree.h \
 		../core/twiddle.h \
 		../core/typedefs.h \
 		boardGUI.h \
@@ -366,7 +365,7 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents icons.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents /usr/lib/x86_64-linux-gnu/qt5/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents boardGUI.h chessthread.h colourDialog.h infoGUI.h initGUI.h playerGUI.h promotionDialog.h ../core/action.h ../core/board.h ../core/eval.h ../core/hash.h ../core/init.h ../core/move.h ../core/play.h ../core/search.h ../core/tree.h ../core/twiddle.h ../core/typedefs.h boardGUI.h infoGUI.h playerGUI.h $(DISTDIR)/
+	$(COPY_FILE) --parents boardGUI.h chessthread.h colourDialog.h infoGUI.h initGUI.h playerGUI.h promotionDialog.h ../core/action.h ../core/board.h ../core/eval.h ../core/hash.h ../core/init.h ../core/move.h ../core/play.h ../core/search.h ../core/twiddle.h ../core/typedefs.h boardGUI.h infoGUI.h playerGUI.h $(DISTDIR)/
 	$(COPY_FILE) --parents main.cpp boardGUI.cpp chessthread.cpp colourDialog.cpp infoGUI.cpp initGUI.cpp playerGUI.cpp promotionDialog.cpp $(DISTDIR)/
 
 
@@ -452,7 +451,6 @@ obj/unix/moc_chessthread.cpp: chessthread.h \
 		../core/typedefs.h \
 		../core/twiddle.h \
 		../core/search.h \
-		../core/tree.h \
 		obj/unix/moc_predefs.h \
 		/usr/lib/qt5/bin/moc
 	/usr/lib/qt5/bin/moc $(DEFINES) --include /home/freddy/Documents/cpl/strawberry/src/gui/obj/unix/moc_predefs.h -I/usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -I/home/freddy/Documents/cpl/strawberry/src/gui -I/home/freddy/Documents/cpl/strawberry/src/core -I/usr/include/x86_64-linux-gnu/qt5 -I/usr/include/x86_64-linux-gnu/qt5/QtSvg -I/usr/include/x86_64-linux-gnu/qt5/QtWidgets -I/usr/include/x86_64-linux-gnu/qt5/QtGui -I/usr/include/x86_64-linux-gnu/qt5/QtCore -I/usr/include/c++/9 -I/usr/include/x86_64-linux-gnu/c++/9 -I/usr/include/c++/9/backward -I/usr/lib/gcc/x86_64-linux-gnu/9/include -I/usr/local/include -I/usr/include/x86_64-linux-gnu -I/usr/include chessthread.h -o obj/unix/moc_chessthread.cpp
@@ -483,8 +481,7 @@ obj/unix/main.o: main.cpp boardGUI.h \
 		initGUI.h \
 		playerGUI.h \
 		../core/play.h \
-		../core/search.h \
-		../core/tree.h
+		../core/search.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/unix/main.o main.cpp
 
 obj/unix/boardGUI.o: boardGUI.cpp boardGUI.h \
@@ -495,8 +492,7 @@ obj/unix/boardGUI.o: boardGUI.cpp boardGUI.h \
 		playerGUI.h \
 		infoGUI.h \
 		../core/play.h \
-		../core/search.h \
-		../core/tree.h
+		../core/search.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/unix/boardGUI.o boardGUI.cpp
 
 obj/unix/chessthread.o: chessthread.cpp chessthread.h \
@@ -505,8 +501,7 @@ obj/unix/chessthread.o: chessthread.cpp chessthread.h \
 		../core/move.h \
 		../core/typedefs.h \
 		../core/twiddle.h \
-		../core/search.h \
-		../core/tree.h
+		../core/search.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o obj/unix/chessthread.o chessthread.cpp
 
 obj/unix/colourDialog.o: colourDialog.cpp boardGUI.h \
@@ -543,7 +538,6 @@ obj/unix/playerGUI.o: playerGUI.cpp playerGUI.h \
 		infoGUI.h \
 		../core/play.h \
 		../core/search.h \
-		../core/tree.h \
 		chessthread.h \
 		promotionDialog.h \
 		colourDialog.h

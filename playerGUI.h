@@ -1,14 +1,15 @@
-#ifndef __PLAYER_GUI_H
-#define __PLAYER_GUI_H
+/* Copyright 2020 Freddy Pringle */
+#ifndef SRC_GUI_PLAYERGUI_H_
+#define SRC_GUI_PLAYERGUI_H_
+
+#include <QWidget>
+#include <QGridLayout>
+#include <string>
 
 #include "boardGUI.h"
 #include "infoGUI.h"
 
 #include "play.h"
-
-#include <QWidget>
-#include <QGridLayout>
-#include <string>
 
 namespace chessGUI {
 
@@ -22,7 +23,7 @@ namespace chessGUI {
  *  computer.
  */
 class PlayerGUI : public QWidget {
-private:
+ private:
     /**
      *  A reference to a \ref chessCore::Player object that handles all
      *  the backend operation.
@@ -38,14 +39,14 @@ private:
     /** The colour the user is playing as. */
     chessCore::colour downSide;
 
-public:
+ public:
     /**
      *  \brief Default constructor for PlayerGUI. Graphically prompt the user
      *  to choose their colour.
      *
      *  \param parent               A reference to the parent QWidget object.
      */
-    PlayerGUI(QWidget* parent=0);
+    explicit PlayerGUI(QWidget* parent = 0);
 
     /**
      *  \brief Parameterised constructor for PlayerGUI. Specify the user colour.
@@ -53,7 +54,7 @@ public:
      *  \param side                 The colour that the user will play as.
      *  \param parent               A reference to the parent QWidget object.
      */
-    PlayerGUI(chessCore::colour side, QWidget* parent=0);
+    explicit PlayerGUI(chessCore::colour side, QWidget* parent = 0);
 
     /**
      *  \brief FEN constructor for PlayerGUI.
@@ -66,7 +67,7 @@ public:
      *                              in FEN format.
      *  \param parent               A reference to the parent QWidget object.
      */
-    PlayerGUI(chessCore::colour side, std::string fen, QWidget *parent=0);
+    PlayerGUI(chessCore::colour side, std::string fen, QWidget *parent = 0);
 
     /** Cleanup code */
     void onClose();
@@ -113,6 +114,6 @@ public:
 };
 
 
-} // end of chessGUI namespace
+}   // namespace chessGUI
 
-#endif
+#endif  // SRC_GUI_PLAYERGUI_H_

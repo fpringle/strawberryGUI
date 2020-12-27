@@ -1,5 +1,6 @@
-#ifndef __INIT_GUI_H
-#define __INIT_GUI_H
+/* Copyright 2020 Freddy Pringle */
+#ifndef SRC_GUI_INITGUI_H_
+#define SRC_GUI_INITGUI_H_
 
 #include <QApplication>
 
@@ -12,6 +13,6 @@ void initGUI();
 void init_all();
 
 
-} // end of chessGUI namespace
+}   // namespace chessGUI
 
-#endif
+#endif  // SRC_GUI_INITGUI_H_

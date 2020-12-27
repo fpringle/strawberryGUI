@@ -64,7 +64,6 @@ HEADERS += boardGUI.h \
            ../core/move.h \
            ../core/play.h \
            ../core/search.h \
-           ../core/tree.h \
            ../core/twiddle.h \
            ../core/typedefs.h \
            boardGUI.h \
