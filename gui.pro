@@ -56,16 +56,16 @@ HEADERS += boardGUI.h \
            initGUI.h \
            playerGUI.h \
            promotionDialog.h \
-           ../core/action.h \
-           ../core/board.h \
-           ../core/eval.h \
-           ../core/hash.h \
-           ../core/init.h \
-           ../core/move.h \
-           ../core/play.h \
-           ../core/search.h \
-           ../core/twiddle.h \
-           ../core/typedefs.h \
+           $${CORE_DIR}/action.h \
+           $${CORE_DIR}/board.h \
+           $${CORE_DIR}/eval.h \
+           $${CORE_DIR}/hash.h \
+           $${CORE_DIR}/init.h \
+           $${CORE_DIR}/move.h \
+           $${CORE_DIR}/play.h \
+           $${CORE_DIR}/search.h \
+           $${CORE_DIR}/twiddle.h \
+           $${CORE_DIR}/typedefs.h \
            boardGUI.h \
            infoGUI.h \
            playerGUI.h
