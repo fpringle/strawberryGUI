@@ -16,8 +16,7 @@ int main(int argc, char *argv[]) {
     QApplication app(argc, argv);
     chessGUI::init_all();
 
-    std::string s = "1k1r4/pp1b1R2/3q2pp/4p3/2B5/4Q3/PPP2B2/2K5 b - -";
-    chessGUI::PlayerGUI *player = new chessGUI::PlayerGUI(chessCore::white, s);
+    chessGUI::PlayerGUI *player = new chessGUI::PlayerGUI(chessCore::white);
 
     player->connect(&app, &QApplication::aboutToQuit,
                     player, &chessGUI::PlayerGUI::onClose);
