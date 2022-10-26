@@ -85,7 +85,7 @@ void PlayerGUI::initGraphics() {
     mainGrid->addWidget(board, 0, 0);
     mainGrid->addWidget(info, 0, 1);
     setLayout(mainGrid);
-    setWindowTitle("Chess");
+    setWindowTitle("Strawberry");
     setWindowIcon(pieceIcons[downSide * 6]);
 }
 

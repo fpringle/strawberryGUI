@@ -12,7 +12,7 @@ namespace chessGUI {
 
 
 void WorkerThread::run() {
-    chessCore::move_t move = player->search();
+    chessCore::move_t move = player->search(10);
     emit resultReady((quint16)move);
 }
 
